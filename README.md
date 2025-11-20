@@ -7,7 +7,7 @@ This repo will walk you through how to access the HMS O2 Cluster, access our pro
 
 
 Open Terminal and login to your user-specific login node:
-<pre> ssh <Your_HMS_ID>@o2.hms.harvard.edu </pre>
+<pre> ssh Your_HMS_ID@o2.hms.harvard.edu </pre>
 
 You can then navigate to our software folder located at this directory:
 
