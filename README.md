@@ -5,6 +5,14 @@ This repo will walk you through how to access the HMS O2 Cluster, access our pro
 
 # Getting Access to the Cluster
 
+
+Open Terminal and login to your user-specific login node:
+<pre> ssh <Your_HMS_ID>@o2.hms.harvard.edu </pre>
+
+You can then navigate to our software folder located at this directory:
+
+<pre> cd /n/data1/hms/wyss/collins/lab/software </pre>
+
 # Loading Conda Environments 
 
 # Protein Design Workflow
