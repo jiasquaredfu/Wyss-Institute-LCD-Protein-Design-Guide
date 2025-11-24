@@ -17,10 +17,14 @@ You can then navigate to our software folder located at this directory:
 
 # Loading Conda Environments 
 
-Conda environments are essentially directories with isolated software packages. We need different conda environments to run different protein design softwares. 
+Conda environments are essentially directories with isolated software packages. Each user must configure conda to be able to run from their node on the cluster, and eventually setup different conda environments to run different protein design softwares. 
 
-Each user must configure conda to be able to run from , and eventually make their own environments.  
+Type the following commands in the software directory one at a time:
 
-export PATH=/n/data1/hms/wyss/collins/lab/software/miniconda/bin:$PATH
+<pre> export PATH=/n/data1/hms/wyss/collins/lab/software/miniconda/bin:$PATH </pre>
+<pre> source /n/data1/hms/wyss/collins/lab/software/miniconda/etc/profile.d/conda.sh </pre>
+<pre> source ~/.bashrc </pre>
+
+After this step, you may need to close and relaunch the cluster on Terminal. 
 
 # Protein Design Workflow
