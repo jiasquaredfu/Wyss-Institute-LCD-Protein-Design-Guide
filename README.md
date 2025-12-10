@@ -19,12 +19,16 @@ You can then navigate to our software folder located at this directory:
 
 Conda environments are essentially directories with isolated software packages. Each user must configure conda to be able to run from their node on the cluster, and eventually setup different conda environments to run different protein design softwares. 
 
-Type the following commands in the software directory one at a time:
+Start by requesting an interactive session on the O2 cluster. The following command allocates 8 CPUs and 32G of memory for a 2 hour session for any expensive commands you would like to run:
+
+<pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
+
+Configure your conda by typing the following commands in the software directory one at a time:
 
 <pre> export PATH=/n/data1/hms/wyss/collins/lab/software/miniconda/bin:$PATH </pre>
 <pre> source /n/data1/hms/wyss/collins/lab/software/miniconda/etc/profile.d/conda.sh </pre>
 <pre> source ~/.bashrc </pre>
 
-After this step, you may need to close and relaunch the cluster on Terminal. 
+After this step, you may need to close and relaunch the cluster on Terminal. Later on if you need to rebuild conda environments or run scripts, always launch an interactive session to not clog up the login node. 
 
 # Protein Design Workflow
