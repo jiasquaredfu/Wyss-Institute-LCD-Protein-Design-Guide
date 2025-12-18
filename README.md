@@ -72,8 +72,7 @@ Configure your conda by typing the following commands in the software directory 
 <pre> source ~/.bashrc </pre>
 
 After this step, you may need to close and relaunch the cluster on Terminal. Later on if you need to rebuild conda environments or run scripts, always launch an interactive session to not clog up the login node. 
-Each protein design tool needs their conda environment to be setup to load the specific packages needed. 
-
+Each protein design tool needs a specific conda environment setup with necessary packages in order to run. 
 
 Here is a table of conda commands which will be needed:
 
@@ -92,3 +91,40 @@ Here is a table of conda commands which will be needed:
 
 
 # Protein Design Workflow
+Check out these overview slides explaning each tool and target applications protein design can tackle [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G).
+
+1. [RFDiffusion](https://github.com/RosettaCommons/RFdiffusion)
+a. Navigate to the RFDiffusion directory
+<pre> cd RFdiffusion/ </pre>
+b. Create the conda environment from the provided yaml file which loads all the necessary packages
+<pre> conda env create -f env/rfdiff.yml </pre>
+ c. Load the environment, after which it should say (rfdiff) instead of (base) in your command line 
+ <pre> conda activate rfdiff  </pre>
+ d. <pre> cd env/SE3Transformer  </pre> 
+ e. Install the packages in the requirements file
+ <pre> pip install --no-cache-dir -r requirements.txt </pre> 
+ f. Setup the NVIDIA SE3nv transformer
+ <pre>  python setup.py install </pre> 
+ g. Return to the root directory of the repository
+ <pre>  cd ../..</pre> 
+ h. Install the RFdiffusion module at the root of the directory
+ <pre> pip install -e </pre> 
+
+Each time you run RFDiffusion, first activate the environment by running:  <pre> conda activate rfdiff  </pre>
+You can deactivate it with: <pre> conda deactivate </pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
