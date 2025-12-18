@@ -1,6 +1,27 @@
 # Wyss-Institute-LCD-Protein-Design-Guide
 This repo will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
 
+# Navigating with Linux
+
+Before starting any computational work, having basic familiarity with Unix/Linux will allow you to navigate and interact with all the software you will use! Going into your Terminal and testing out these commands is a good way to get some hands-on practice. 
+
+| Linux/VIM Command  | Function                                                |
+|--------------------------|---------------------------------------------------------|
+| `ls`                     | show contents of current directory                      |
+| `cd <folder_name>`       | move into folder                                        |
+| `cd ..`                  | move out of folder                                      |
+| `pwd`                    | show current directory file path                        |
+| `mv <file_name> <new_location>` | move file to new location                           |
+| `mvdir <folder_name> <new_location>` | move folder to new location                     |
+| `rm <file_name>`         | remove file                                             |
+| `rmdir <folder_name>`    | remove folder                                           |
+| `vi <file_name>`         | open VIM editor (press "i" key to enter editing mode)  |
+| `:wq`                    | save and quit file                                      |
+| `:q`                     | quit file without saving                                |
+
+For more helpful resources, check out these links:
+- [Here](https://www.geeksforgeeks.org/linux-unix/linux-commands-cheat-sheet/) is a comprehensive Linux cheat sheet for reference <br>
+- [Here](https://gitlab.com/slackermedia/bashcrawl) is a game that helps you build up your Linux muscle memory! <br>
 
 
 # Getting Access to the Cluster
@@ -51,5 +72,23 @@ Configure your conda by typing the following commands in the software directory 
 <pre> source ~/.bashrc </pre>
 
 After this step, you may need to close and relaunch the cluster on Terminal. Later on if you need to rebuild conda environments or run scripts, always launch an interactive session to not clog up the login node. 
+Each protein design tool needs their conda environment to be setup to load the specific packages needed. 
+
+
+Here is a table of conda commands which will be needed:
+
+| Conda Command  | Function                                                |
+|--------------------------|---------------------------------------------------------|
+| `conda info`             | check conda status and version                          |
+| `conda install PACKAGENAME`     | add package to conda                             | 
+| `conda activate ENVNAME`     | activate conda environment                            | 
+| `conda deactivate`     | deactivate current conda environment                            | 
+| `conda env list`          | show conda environments                            | 
+| `conda list`          | show packages on current conda environment                       |
+| `conda rename -n OLD_ENV_NAME NEW_ENV_NAME`          | rename conda environment                       |
+| `conda env remove --name ENVNAME`          | delete conda environment                       |
+
+[Here](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf) is a comprehensive Conda cheat sheet for reference!
+
 
 # Protein Design Workflow
