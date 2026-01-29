@@ -84,21 +84,6 @@ If you need to run GPU-dependent tools (any of the protein design tools like RFd
 After this step, you may need to close and relaunch the cluster on Terminal. Later on if you need to rebuild conda environments or run scripts, always launch an interactive session to not clog up the login node. 
 Each protein design tool needs a specific conda environment setup with necessary packages in order to run. 
 
-Here is a table of conda commands which will be needed:
-
-| Conda Command  | Function                                                |
-|--------------------------|---------------------------------------------------------|
-| `conda info`             | check conda status and version                          |
-| `conda install PACKAGENAME`     | add package to conda                             | 
-| `conda activate ENVNAME`     | activate conda environment                            | 
-| `conda deactivate`     | deactivate current conda environment                            | 
-| `conda env list`          | show conda environments                            | 
-| `conda list`          | show packages on current conda environment                       |
-| `conda rename -n OLD_ENV_NAME NEW_ENV_NAME`          | rename conda environment                       |
-| `conda env remove --name ENVNAME`          | delete conda environment                       |
-
-[Here](https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf) is a comprehensive Conda cheat sheet for reference!
-
 
 # Protein Design Workflow
 Check out these overview slides explaning each tool and target applications protein design can tackle [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G).
