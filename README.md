@@ -14,7 +14,7 @@ You can then navigate to our software folder located at this directory:
 <pre> cd /n/data1/hms/wyss/collins/lab/software </pre>
 
 
-# Setting Up Conda
+# Setting Up Conda -> note to NOT download it again if experimenting. 
 
 Conda runs "environments" are essentially directories with isolated software packages. Each user must configure the shared conda to be able to run it from their node on the cluster, and eventually setup different conda environments to run different protein design softwares. 
 
