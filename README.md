@@ -22,7 +22,6 @@ Start by requesting an interactive session on the O2 cluster. The following comm
 
 <pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
 
-
 1. Initialize conda for your account
 <pre> /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/conda init bash </pre>
 
@@ -90,18 +89,26 @@ conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r 
  and retry. 
 
 
+
+conda env create -f environment.yml
+
+
+
+
 # Protein Design Workflow
 Check out these overview slides explaning each tool and target applications protein design can tackle [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G).
 
-If you need to run GPU-dependent tools (any of the protein design tools like RFdiffusion, run the following line. If queuing takes a very long time, reducing the time and memory allocation may get you allocated compute faster. 
+If you need to run GPU-dependent tools quickly (for example, your RFdiffusion SLURM job is stuck in queue for hours or days!) run the following line:
+<pre> srun --pty -t 1:0:0 --mem 32G -p gpu --gres=gpu:1 bash </pre>
+and run the scripts directly (without a .slurm file). If this also queues for a long time, reducing the time (-t) and memory allocation (--mem) may get you allocated compute faster. 
 
-<pre> srun --pty -t 1:0:0 --mem 8G -p gpu --gres=gpu:1 bash </pre>
+You should be in the software directory which looks like this:
 
-
+<img width="1026" height="86" alt="Screenshot 2026-01-29 at 3 01 51 PM" src="https://github.com/user-attachments/assets/95bc0316-1134-459f-a53c-831305947beb" />
 
 1. [RFDiffusion](https://github.com/RosettaCommons/RFdiffusion)
-a. Navigate to the RFDiffusion directory
-<pre> cd RFdiffusion/ </pre>
+a. Navigate to foundry, which hosts RFdiffusion3.
+<pre> cd 1_backbone_design/ </pre>
 b. Create the conda environment from the provided yaml file which loads all the necessary packages
 <pre> conda env create -f env/rfdiff.yml </pre>
  c. Load the environment, after which it should say (rfdiff) instead of (base) in your command line 
