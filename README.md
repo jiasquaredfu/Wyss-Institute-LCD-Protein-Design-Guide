@@ -22,7 +22,7 @@ Start by requesting an interactive session on the O2 cluster. The following comm
 
 <pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
 
-1. Initialize conda for your account
+1. Initialize conda for your account (do this only once when you are setting this up for the first time)
 <pre> /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/conda init bash </pre>
 
 2. Reload your shell
