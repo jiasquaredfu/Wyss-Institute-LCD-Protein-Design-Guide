@@ -53,23 +53,72 @@ Check out the table for a guide to basic SLURM commands:
 Here is a [link](https://harvardmed.atlassian.net/wiki/spaces/O2/pages/1586793632/Using+Slurm+Basic) to more detailed SLURM documentation from O2 RC. 
 
 
-# Loading Conda Environments 
+# Setting Up Conda
 
-Conda environments are essentially directories with isolated software packages. Each user must configure conda to be able to run from their node on the cluster, and eventually setup different conda environments to run different protein design softwares. 
+Conda runs "environments" are essentially directories with isolated software packages. Each user must configure the shared conda to be able to run it from their node on the cluster, and eventually setup different conda environments to run different protein design softwares. 
 
-Start by requesting an interactive session on the O2 cluster. The following command allocates 8 CPUs and 32G of memory for a 2 hour session for any debugging or other scripts you would like to run:
+Start by requesting an interactive session on the O2 cluster. The following command allocates 8 CPUs and 32G of memory for a 2 hour session. Any computationally intensive activity like setup or debugging should be done in one of these!
 
 <pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
+
+
+1. Initialize conda for your account
+<pre> /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/conda init bash </pre>
+
+2. Reload your shell
+<pre> source ~/.bashrc </pre>
+You may need to type exit and re-ssh back into the cluster for this to work. 
+
+3. Verify installation
+<pre> which conda </pre>
+<pre> conda --version  </pre>
+
+Your terminal should print something like this:
+
+<pre>
+
+ conda ()
+{ 
+    \local cmd="${1-__missing__}";
+    case "$cmd" in 
+        activate | deactivate)
+            __conda_activate "$@"
+        ;;
+        install | update | upgrade | remove | uninstall)
+            __conda_exe "$@" || \return;
+            __conda_activate reactivate
+        ;;
+        *)
+            __conda_exe "$@"
+        ;;
+    esac
+}
+
+conda 25.11.1
+
+
+</pre>
+
+
+If this doesn't work, we have to manually configure conda into your bash:
+
+1. <pre> vi ~/.bashrc </pre>
+2. Type i
+3. Copy paste these lines at the bottom of the file:
+<pre> export PATH="/n/data1/hms/wyss/collins/lab/software/miniconda3/bin:$PATH"
+source /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh </pre>
+4. <pre> source ~/.bashrc </pre> and re-ssh if needed
+5. Verify installation <pre> which conda </pre>
+<pre> conda --version  </pre> 
+
+
+# Loading Conda Environments 
 
 If you need to run GPU-dependent tools (any of the protein design tools like RFdiffusion, run the following line. If queuing takes a very long time, reducing the time and memory allocation may get you allocated compute faster. 
 
 <pre> srun --pty -t 1:0:0 --mem 8G -p gpu --gres=gpu:1 bash </pre>
 
-Configure your conda by typing the following commands in the software directory one at a time:
 
-<pre> export PATH=/n/data1/hms/wyss/collins/lab/software/miniconda/bin:$PATH </pre>
-<pre> source /n/data1/hms/wyss/collins/lab/software/miniconda/etc/profile.d/conda.sh </pre>
-<pre> source ~/.bashrc </pre>
 
 After this step, you may need to close and relaunch the cluster on Terminal. Later on if you need to rebuild conda environments or run scripts, always launch an interactive session to not clog up the login node. 
 Each protein design tool needs a specific conda environment setup with necessary packages in order to run. 
