@@ -20,3 +20,19 @@ For more helpful resources, check out these links:
 - [Here](https://www.geeksforgeeks.org/linux-unix/linux-commands-cheat-sheet/) is a comprehensive Linux cheat sheet for reference <br>
 - [Here](https://gitlab.com/slackermedia/bashcrawl) is a game that helps you build up your Linux muscle memory! <br>
 
+
+# Submitting Cluster Jobs with SLURM
+
+SLURM is the parallel-computing scheduling system for high performance computing (HPC) clusters. It allocates compute resources for each researcher's job requests. Instead of running scripts directly in the terminal, you have to submit a SLURM script to execute the job you want to the computer can run on a node in the computer cluster.
+
+Check out the table for a guide to basic SLURM commands:
+
+ SLURM Command  | Function                                                |
+|--------------------------|---------------------------------------------------------|
+| `sbatch <jobscript>`     | submit batch job                     |
+| `srun --pty -t 0-1:0:0 -p interactive /bin/bash`       | start 1 hour interactive session (run short scripts without submitting batch job)                                         |
+| `squeue -u $USER`                  | check status of your run in the queue                                    |
+| `scancel <jobid>`                    | cancel job in queue                        |
+| `	sinfo` | check status of node                           |
+
+Here is a [link](https://harvardmed.atlassian.net/wiki/spaces/O2/pages/1586793632/Using+Slurm+Basic) to more detailed SLURM documentation from O2 RC. 
