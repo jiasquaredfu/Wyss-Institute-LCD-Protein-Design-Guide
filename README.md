@@ -1,7 +1,7 @@
 # Wyss-Institute-LCD-Protein-Design-Guide
-This repo will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
+This repo will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! Protein design work uses some basic syntax. You can refer to the commands you need to be familiar with [here](./command_cheatsheet.md). 
 
-# Getting Access to the Cluster
+# Accessing the Cluster
 
 1. Lab members will first need to complete the [RC PPMS Billing Account form](https://tinyurl.com/request-PPMS-account) before they can request an O2 account 
 2. Lab members will then need an O2 account to request an O2 account on the [Research Computing website](https://tinyurl.com/request-O2-account)
@@ -63,30 +63,30 @@ conda 25.11.1
 
 If this doesn't work, we have to manually configure conda into your bash:
 
-1. <pre> vi ~/.bashrc </pre>
-2. Type i
+1. Open bashrc using the VIM editor
+    <pre> vi ~/.bashrc </pre>
+2. Type i, you should see --INSERT appear at the bottom of the file. 
 3. Copy paste these lines at the bottom of the file:
 <pre> export PATH="/n/data1/hms/wyss/collins/lab/software/miniconda3/bin:$PATH"
 source /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh </pre>
-4. <pre> source ~/.bashrc </pre> and re-ssh if needed
+4. Save by typing :wq and enter
+4. Reload with <pre> source ~/.bashrc </pre> and re-ssh if needed
 5. Verify installation <pre> which conda </pre>
 <pre> conda --version  </pre> 
 
 
 # Loading Conda Environments 
+Each protein design tool needs a specific conda environment setup with necessary packages in order to run. 
+
+
+# Protein Design Workflow
+Check out these overview slides explaning each tool and target applications protein design can tackle [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G).
 
 If you need to run GPU-dependent tools (any of the protein design tools like RFdiffusion, run the following line. If queuing takes a very long time, reducing the time and memory allocation may get you allocated compute faster. 
 
 <pre> srun --pty -t 1:0:0 --mem 8G -p gpu --gres=gpu:1 bash </pre>
 
 
-
-After this step, you may need to close and relaunch the cluster on Terminal. Later on if you need to rebuild conda environments or run scripts, always launch an interactive session to not clog up the login node. 
-Each protein design tool needs a specific conda environment setup with necessary packages in order to run. 
-
-
-# Protein Design Workflow
-Check out these overview slides explaning each tool and target applications protein design can tackle [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G).
 
 1. [RFDiffusion](https://github.com/RosettaCommons/RFdiffusion)
 a. Navigate to the RFDiffusion directory
