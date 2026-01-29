@@ -13,22 +13,6 @@ You can then navigate to our software folder located at this directory:
 
 <pre> cd /n/data1/hms/wyss/collins/lab/software </pre>
 
-# Basic SLURM Commands 
-
-SLURM is the parallel-computing scheduling system for high performance computing (HPC) clusters. It allocates compute resources for each researcher's job requests. Instead of running scripts directly in the terminal, you have to submit a SLURM script to execute the job you want to the computer can run on a node in the computer cluster.
-
-Check out the table for a guide to basic SLURM commands:
-
- SLURM Command  | Function                                                |
-|--------------------------|---------------------------------------------------------|
-| `sbatch <jobscript>`     | submit batch job                     |
-| `srun --pty -t 0-1:0:0 -p interactive /bin/bash`       | start 1 hour interactive session (run short scripts without submitting batch job)                                         |
-| `squeue -u $USER`                  | check status of your run in the queue                                    |
-| `scancel <jobid>`                    | cancel job in queue                        |
-| `	sinfo` | check status of node                           |
-
-Here is a [link](https://harvardmed.atlassian.net/wiki/spaces/O2/pages/1586793632/Using+Slurm+Basic) to more detailed SLURM documentation from O2 RC. 
-
 
 # Setting Up Conda
 
