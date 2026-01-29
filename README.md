@@ -78,6 +78,17 @@ source /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh 
 # Loading Conda Environments 
 Each protein design tool needs a specific conda environment setup with necessary packages in order to run. 
 
+If you get this error: 
+
+<pre> CondaToSNonInteractiveError: Terms of Service have not been accepted for the following channels. Please accept or remove them before proceeding:
+    - https://repo.anaconda.com/pkgs/main
+    - https://repo.anaconda.com/pkgs/r </pre>
+
+Just type:
+<pre> conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r  </pre>
+ and retry. 
+
 
 # Protein Design Workflow
 Check out these overview slides explaning each tool and target applications protein design can tackle [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G).
