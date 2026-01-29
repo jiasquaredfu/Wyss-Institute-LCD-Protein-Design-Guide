@@ -24,6 +24,8 @@ For more helpful resources, check out these links:
 
 # Accessing Packages with Conda 
 
+Conda runs "environments" are essentially directories with isolated software packages. Each user must configure the shared conda to be able to run it from their node on the cluster, and eventually setup different conda environments to run different protein design softwares. 
+
 Here is a table of conda commands which will be needed:
 
 | Conda Command  | Function                                                |
