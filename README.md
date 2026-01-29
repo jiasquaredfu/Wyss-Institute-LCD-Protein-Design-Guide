@@ -73,6 +73,8 @@ source /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh 
 5. Verify installation <pre> which conda </pre>
 <pre> conda --version  </pre> 
 
+Create the conda environment from the provided yaml file which loads all the necessary packages
+<pre> conda env create -f env/rfdiff.yml </pre>
 
 # Loading Conda Environments 
 Each protein design tool needs a specific conda environment setup with necessary packages in order to run. 
@@ -89,10 +91,7 @@ conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r 
  and retry. 
 
 
-
 conda env create -f environment.yml
-
-
 
 
 # Protein Design Workflow
@@ -106,11 +105,10 @@ You should be in the software directory which looks like this:
 
 <img width="1026" height="86" alt="Screenshot 2026-01-29 at 3 01 51 PM" src="https://github.com/user-attachments/assets/95bc0316-1134-459f-a53c-831305947beb" />
 
+
 1. [RFDiffusion](https://github.com/RosettaCommons/RFdiffusion)
-a. Navigate to foundry, which hosts RFdiffusion3.
+a. Navigate to the backbone design folder
 <pre> cd 1_backbone_design/ </pre>
-b. Create the conda environment from the provided yaml file which loads all the necessary packages
-<pre> conda env create -f env/rfdiff.yml </pre>
  c. Load the environment, after which it should say (rfdiff) instead of (base) in your command line 
  <pre> conda activate rfdiff  </pre>
  d. <pre> cd env/SE3Transformer  </pre> 
