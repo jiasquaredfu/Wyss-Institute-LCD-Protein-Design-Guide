@@ -68,13 +68,38 @@ source /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh 
 4. Save by typing :wq and enter
 4. Reload with <pre> source ~/.bashrc </pre> and re-ssh if needed
 5. Verify installation <pre> which conda </pre>
-<pre> conda --version  </pre> 
+<pre> conda --version  </pre>
 
-Create the conda environment from the provided yaml file which loads all the necessary packages
-<pre> conda env create -f env/rfdiff.yml </pre>
 
 # Loading Conda Environments 
-Each protein design tool needs a specific conda environment setup with necessary packages in order to run. 
+Each protein design tool needs a specific conda environment setup with necessary packages in order to run. You will load the appropriate environments from pre-made yaml files!
+
+1. Navigate to the yaml folder
+
+<pre> cd /n/data1/hms/wyss/collins/lab/software/miniconda3/env_ymls  </pre>
+
+2. Create the needed environments
+<pre> conda env create -f foundry.yml </pre>
+<pre> conda env create -f pmpnn.yml </pre>
+
+3. Verify loaded environments
+
+<pre> conda env list </pre>
+
+The output should look like this:
+<pre> 
+# conda environments:
+#
+# * -> active
+# + -> frozen
+base                 *   /n/data1/hms/wyss/collins/lab/software/miniconda3
+foundry                  /n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry
+pmpnn                    /n/data1/hms/wyss/collins/lab/software/miniconda3/envs/pmpnn </pre>
+
+
+To test any software with their respective environments, you can activate the environment this way:
+
+<pre> conda activate [env_name] </pre>
 
 If you get this error: 
 
@@ -86,9 +111,6 @@ Just type:
 <pre> conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
 conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r  </pre>
  and retry. 
-
-/n/data1/hms/wyss/collins/lab/software/miniconda3/env_ymls
-conda env create -f environment.yml
 
 
 # Running the Protein Design Pipeline
