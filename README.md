@@ -99,7 +99,7 @@ pmpnn                    /n/data1/hms/wyss/collins/lab/software/miniconda3/envs/
 
 To test any software with their respective environments, you can activate the environment this way:
 
-<pre> conda activate [env_name] </pre>
+<pre> conda activate {env_name} </pre>
 
 If you get this error: 
 
@@ -114,22 +114,33 @@ conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r 
 
 
 # Running the Protein Design Pipeline
-Check out these overview slides explaning each tool and target applications protein design can tackle [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G).
+For some context on what this pipeline looks like, [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G) are some overview slides explaining each tool and target applications protein design can tackle. The official Github with documentation for each software used in the pipeline are linked in the header if you want download and adjust the models yourself. 
 
-If you need to run GPU-dependent tools quickly (for example, your RFdiffusion SLURM job is stuck in queue for hours or days!) run the following line:
-<pre> srun --pty -t 1:0:0 --mem 32G -p gpu --gres=gpu:1 bash </pre>
-and run the scripts directly (without a .slurm file). If this also queues for a long time, reducing the time (-t) and memory allocation (--mem) may get you allocated compute faster. -> note the lowest recommended range 
+To keep your work organized and prevent accidental issues with the shared software folder, please make your own folder to store inputs and outputs.
 
-You should be in the software directory which looks like this:
+1. Navigate to the users folder
+<pre> cd /n/data1/hms/wyss/collins/lab/users </pre>
 
-<img width="1026" height="86" alt="Screenshot 2026-01-29 at 3 01 51 PM" src="https://github.com/user-attachments/assets/95bc0316-1134-459f-a53c-831305947beb" />
+2. Create a personal directory for each step of the workflow.
+You can duplicate my folder or just cd into it to see a setup structure you can use.
+
+<pre> cp -r jiajia {your_name} </pre>
+
+These are the pipeline components we will be utilizing for each step of the pathway:
+
+<img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
+
+1. [RFDiffusion3 (part of Rosetta Common's Foundry)](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) - Backbone Design
+a.  Load the environment, after which it should say (foundry) instead of (base) in your command line 
+ <pre> conda activate foundry  </pre>
+b. Create input and output folders in your personal directory 
+<pre> mkdir /input  </pre> 
+<pre> mkdir /output </pre> 
+c. Adjust SLURM script
+<pre> yo  </pre> 
 
 
-1. [RFDiffusion](https://github.com/RosettaCommons/RFdiffusion)
-a. Navigate to the backbone design folder
-<pre> cd 1_backbone_design/ </pre>
- c. Load the environment, after which it should say (rfdiff) instead of (base) in your command line 
- <pre> conda activate rfdiff  </pre>
+
  d. <pre> cd env/SE3Transformer  </pre> 
  e. Install the packages in the requirements file
  <pre> pip install --no-cache-dir -r requirements.txt </pre> 
@@ -146,7 +157,9 @@ You can deactivate it with: <pre> conda deactivate </pre>
 
 
 
-
+If you need to run GPU-dependent tools quickly (for example, your RFdiffusion SLURM job is stuck in queue for hours or days!) run the following line:
+<pre> srun --pty -t 1:0:0 --mem 32G -p gpu --gres=gpu:1 bash </pre>
+and run the scripts directly (without a .slurm file). If this also queues for a long time, reducing the time (-t) and memory allocation (--mem) may get you allocated compute faster. -> note the lowest recommended range 
 
 
 
