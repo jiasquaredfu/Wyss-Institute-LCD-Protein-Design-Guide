@@ -13,14 +13,13 @@ You can then navigate to our software folder located at this directory:
 
 <pre> cd /n/data1/hms/wyss/collins/lab/software </pre>
 
-
-# Setting Up Conda -> note to NOT download it again if experimenting. 
-
-Conda runs "environments" are essentially directories with isolated software packages. Each user must configure the shared conda to be able to run it from their node on the cluster, and eventually setup different conda environments to run different protein design softwares. 
-
 Start by requesting an interactive session on the O2 cluster. The following command allocates 8 CPUs and 32G of memory for a 2 hour session. Any computationally intensive activity like setup or debugging should be done in one of these!
 
 <pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
+
+# Setup Conda Before Running Pipeline 
+
+Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. You only need to run the setup steps <b>once</b>!
 
 1. Initialize conda for your account (do this only once when you are setting this up for the first time)
 <pre> /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/conda init bash </pre>
@@ -56,11 +55,9 @@ Your terminal should print something like this:
 
 conda 25.11.1
 
-
 </pre>
 
-
-If this doesn't work, we have to manually configure conda into your bash:
+If this doesn't work, we have to manually configure conda into your bash (these steps also only need to be completed once):
 
 1. Open bashrc using the VIM editor
     <pre> vi ~/.bashrc </pre>
@@ -90,11 +87,11 @@ Just type:
 conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r  </pre>
  and retry. 
 
-
+/n/data1/hms/wyss/collins/lab/software/miniconda3/env_ymls
 conda env create -f environment.yml
 
 
-# Protein Design Workflow
+# Running the Protein Design Pipeline
 Check out these overview slides explaning each tool and target applications protein design can tackle [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G).
 
 If you need to run GPU-dependent tools quickly (for example, your RFdiffusion SLURM job is stuck in queue for hours or days!) run the following line:
