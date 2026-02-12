@@ -24,7 +24,8 @@ Start by requesting an interactive session on the O2 cluster. The following comm
 There are two main setup steps needed before the pipeline can run. 
 <b>
 1. Initializing Conda on the Cluster
-2. Downloading Pymol on your Computer 
+2. Creating your Personal Folder on the Cluster 
+3. Downloading Pymol on your Computer 
 </b>
 
 ## Conda
@@ -122,6 +123,19 @@ conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r 
  and retry. 
 
 
+ ## Creating your Personal Folder 
+To keep your work organized and prevent accidental conflicts with the shared software folder, please make your own folder on the cluster to store inputs and outputs.
+
+1. Navigate to the users folder
+<pre> cd /n/data1/hms/wyss/collins/lab/users </pre>
+
+2. Create a personal directory for each step of the workflow. You can duplicate my folder or make your own and cd into my folder to see an example setup structure
+
+<pre> cp -r jiajia {your_name} </pre>
+or 
+<pre> mkdir {your_name} </pre>
+
+
  ## Pymol 
 Pymol is a protein structure visualization software. This allows you to visually inspect the structure you design throughout the pipeline steps and conduct preliminary analyses and filtering. Pymol is downloaded off the cluster, on your laptop. <b> You only need to run these setup steps once </b>!
 
@@ -131,16 +145,18 @@ Pymol is a protein structure visualization software. This allows you to visually
 3. Highly recommend reviewing basic Pymol commands in the cheat sheet [here](./command_cheatsheet.md)!
 
 
-# Running the Protein Design Pipeline
+# Running the Protein Pipeline
 <img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
+
+
 
 The "standard" protein design pipeline is composed of 3 steps:
 
-<b> <h4> 1. Backbone design </b> </h4>
- -Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein 
+<b><h4> 1. Backbone design </b></h4>
+ - Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein 
  - Our pipeline uses the newest iteration of RFDiffusion3 through Rosetta Commons' Foundry, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
  - <b> Input: </b> .PDB file of your target and .JSON file containing design parameters
- - <b> Output: </b> .cif.gz zipped structure file containing backbone with only alpha carbons (will be a sequence of GGGGGGs)
+   <b> Output: </b> .cif.gz zipped structure file containing backbone with only alpha carbons (will be a sequence of GGGGGGs)
 <b> <h4> 2. Sequence design </b> </h4>
  - Assigns an amino acid sequence which folds into the bare backbone structure
  - Our pipeline uses ProteinMPNN (which has many subsets like LigandMPNN,ThermoMPNN depending on your application), paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
@@ -153,19 +169,7 @@ The "standard" protein design pipeline is composed of 3 steps:
  - <b> Output: </b>
 
 
-
 For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). The official Github with documentation for each software used in the pipeline are linked in the header if you want download and adjust the models yourself. 
-
-To keep your work organized and prevent accidental issues with the shared software folder, please make your own folder to store inputs and outputs.
-
-1. Navigate to the users folder
-<pre> cd /n/data1/hms/wyss/collins/lab/users </pre>
-
-2. Create a personal directory for each step of the workflow.
-You can duplicate my folder or just cd into it to see a setup structure you can use.
-
-<pre> cp -r jiajia {your_name} </pre>
-
 
 1. [RFDiffusion3 (part of Rosetta Common's Foundry)](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) - Backbone Design
 a.  Load the environment, after which it should say (foundry) instead of (base) in your command line 
