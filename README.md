@@ -1,7 +1,7 @@
 # Wyss-Institute-LCD-Protein-Design-Guide
 This repo will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
 
-<b><h6> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands for reference [here](./command_cheatsheet.md). </b></h6>
+<b> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands for reference [here](./command_cheatsheet.md). </b>
 
 # Accessing the Cluster
 
@@ -22,8 +22,10 @@ Start by requesting an interactive session on the O2 cluster. The following comm
 # Setup Before Running Pipeline 
 
 There are two main setup steps needed before the pipeline can run. 
+<b>
 1. Initializing Conda on the Cluster
-3. Downloading Pymol on your Computer 
+2. Downloading Pymol on your Computer 
+</b>
 
 ## Conda
 Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. <b> You only need to run these setup steps once </b>!
@@ -78,7 +80,7 @@ source /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh 
 <pre> conda --version  </pre>
 
 
-# Loading Conda Environments 
+## Loading Conda Environments 
 Each protein design tool needs a specific conda environment setup with necessary packages in order to run. You will load the appropriate environments from pre-made yaml files!
 
 1. Navigate to the yaml folder
