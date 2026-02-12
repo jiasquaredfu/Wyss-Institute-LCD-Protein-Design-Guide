@@ -1,5 +1,7 @@
 # Wyss-Institute-LCD-Protein-Design-Guide
-This repo will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! Protein design work uses some basic syntax. You can refer to the commands you need to be familiar with [here](./command_cheatsheet.md). 
+This repo will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
+
+<b><h6> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands for reference [here](./command_cheatsheet.md). </b></h6>
 
 # Accessing the Cluster
 
@@ -17,9 +19,14 @@ Start by requesting an interactive session on the O2 cluster. The following comm
 
 <pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
 
-# Setup Conda Before Running Pipeline 
+# Setup Before Running Pipeline 
 
-Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. You only need to run the setup steps <b>once</b>!
+There are two main setup steps needed before the pipeline can run. 
+1. Initializing Conda on the Cluster
+3. Downloading Pymol on your Computer 
+
+## Conda
+Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. <b> You only need to run these setup steps once </b>!
 
 1. Initialize conda for your account (do this only once when you are setting this up for the first time)
 <pre> /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/conda init bash </pre>
@@ -113,8 +120,36 @@ conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r 
  and retry. 
 
 
+ ## Pymol 
+Pymol is a protein structure visualization software. This allows you to visually inspect the structure you design throughout the pipeline steps and conduct preliminary analyses and filtering. Pymol is downloaded off the cluster, on your laptop. <b> You only need to run these setup steps once </b>!
+
+1. Download the educational Pymol [here](https://pymol.org/edu/) using your Wyss or HMS email
+2. You should see a UI like this, and be able to load .pdb or .cif files and play around with the structures. 
+<img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
+3. Highly recommend reviewing basic Pymol commands in the cheat sheet [here](./command_cheatsheet.md)!
+
+
 # Running the Protein Design Pipeline
-For some context on what this pipeline looks like, [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G) are some overview slides explaining each tool and target applications protein design can tackle. The official Github with documentation for each software used in the pipeline are linked in the header if you want download and adjust the models yourself. 
+The "standard" protein design pipeline is composed of 3 steps:
+1. Backbone design
+- Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein 
+- Our pipeline uses the newest iteration of RFDiffusion3 through Rosetta Commons' Foundry, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
+- Input: .PDB file of your target and .JSON file containing design parameters
+- Output: .cif.gz zipped structure file containing backbone with only alpha carbons (will be a sequence of GGGGGGs)
+2. Sequence design 
+- Assigns an amino acid sequence which folds into the bare backbone structure
+- Our pipeline uses ProteinMPNN (which has many subsets like LigandMPNN,ThermoMPNN depending on your application), paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
+- Input: .PDB file of the backbone from RFdiffusion 
+- Output: .fa sequence file containing amino acid sequence (chain separated by / )
+3. Structure prediction
+- Validates structure by folding into final conformation, allows for computational analysis and filtering before experimental validation
+- Our pipeline uses the newest iteration of RoseTTAFold3 through Rosetta Commons' Foundry and Colabfold, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
+- Input: .JSON file containing sequence(s) from the PMPNN .fa file
+- Output: 
+<img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
+
+
+For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). The official Github with documentation for each software used in the pipeline are linked in the header if you want download and adjust the models yourself. 
 
 To keep your work organized and prevent accidental issues with the shared software folder, please make your own folder to store inputs and outputs.
 
@@ -126,9 +161,6 @@ You can duplicate my folder or just cd into it to see a setup structure you can 
 
 <pre> cp -r jiajia {your_name} </pre>
 
-These are the pipeline components we will be utilizing for each step of the pathway:
-
-<img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
 
 1. [RFDiffusion3 (part of Rosetta Common's Foundry)](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) - Backbone Design
 a.  Load the environment, after which it should say (foundry) instead of (base) in your command line 
@@ -141,17 +173,7 @@ c. Adjust SLURM script
 
 
 
- d. <pre> cd env/SE3Transformer  </pre> 
- e. Install the packages in the requirements file
- <pre> pip install --no-cache-dir -r requirements.txt </pre> 
- f. Setup the NVIDIA SE3nv transformer
- <pre>  python setup.py install </pre> 
- g. Return to the root directory of the repository
- <pre>  cd ../..</pre> 
- h. Install the RFdiffusion module at the root of the directory
- <pre> pip install -e </pre> 
-
-Each time you run RFDiffusion, first activate the environment by running:  <pre> conda activate rfdiff  </pre>
+Each time you run RFDiffusion, first activate the environment by running:  <pre> conda activate foundry  </pre>
 You can deactivate it with: <pre> conda deactivate </pre>
 
 
