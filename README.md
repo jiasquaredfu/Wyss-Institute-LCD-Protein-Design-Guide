@@ -132,23 +132,26 @@ Pymol is a protein structure visualization software. This allows you to visually
 
 
 # Running the Protein Design Pipeline
-The "standard" protein design pipeline is composed of 3 steps:
-1. Backbone design
-- Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein 
-- Our pipeline uses the newest iteration of RFDiffusion3 through Rosetta Commons' Foundry, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
-- Input: .PDB file of your target and .JSON file containing design parameters
-- Output: .cif.gz zipped structure file containing backbone with only alpha carbons (will be a sequence of GGGGGGs)
-2. Sequence design 
-- Assigns an amino acid sequence which folds into the bare backbone structure
-- Our pipeline uses ProteinMPNN (which has many subsets like LigandMPNN,ThermoMPNN depending on your application), paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
-- Input: .PDB file of the backbone from RFdiffusion 
-- Output: .fa sequence file containing amino acid sequence (chain separated by / )
-3. Structure prediction
-- Validates structure by folding into final conformation, allows for computational analysis and filtering before experimental validation
-- Our pipeline uses the newest iteration of RoseTTAFold3 through Rosetta Commons' Foundry and Colabfold, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
-- Input: .JSON file containing sequence(s) from the PMPNN .fa file
-- Output: 
 <img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
+
+The "standard" protein design pipeline is composed of 3 steps:
+
+<b> <h4> 1. Backbone design </b> </h4>
+ -Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein 
+ - Our pipeline uses the newest iteration of RFDiffusion3 through Rosetta Commons' Foundry, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
+ - <b> Input: </b> .PDB file of your target and .JSON file containing design parameters
+ - <b> Output: </b> .cif.gz zipped structure file containing backbone with only alpha carbons (will be a sequence of GGGGGGs)
+<b> <h4> 2. Sequence design </b> </h4>
+ - Assigns an amino acid sequence which folds into the bare backbone structure
+ - Our pipeline uses ProteinMPNN (which has many subsets like LigandMPNN,ThermoMPNN depending on your application), paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
+ - <b> Input: </b> .PDB file of the backbone from RFdiffusion 
+ - <b> Output: </b> .fa sequence file containing amino acid sequence (chain separated by / )
+<b> <h4> 3. Structure prediction </b> </h4>
+ - Validates structure by folding into final conformation, allows for computational analysis and filtering before experimental validation
+ - Our pipeline uses the newest iteration of RoseTTAFold3 through Rosetta Commons' Foundry and Colabfold, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
+ - <b> Input: </b> .JSON file containing sequence(s) from the PMPNN .fa file
+ - <b> Output: </b>
+
 
 
 For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). The official Github with documentation for each software used in the pipeline are linked in the header if you want download and adjust the models yourself. 
