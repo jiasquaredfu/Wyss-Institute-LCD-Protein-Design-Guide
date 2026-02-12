@@ -1,9 +1,10 @@
 # Wyss-Institute-LCD-Protein-Design-Guide
-This repo will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
+Greetings! This README will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
 
-<b> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands for reference [here](./command_cheatsheet.md). </b>
+<h3>
+<b> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands to reference [here](./command_cheatsheet.md). </b> </h3>h3>
 
-# Accessing the Cluster
+# Accessing the Cluster :computer:
 
 1. Lab members will first need to complete the [RC PPMS Billing Account form](https://tinyurl.com/request-PPMS-account) before they can request an O2 account 
 2. Lab members will then need an O2 account to request an O2 account on the [Research Computing website](https://tinyurl.com/request-O2-account)
@@ -19,19 +20,23 @@ Start by requesting an interactive session on the O2 cluster. The following comm
 
 <pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
 
-# Setup Before Running Pipeline 
+# Setup Before Running Pipeline :satellite:
 
-There are two main setup steps needed before the pipeline can run. 
 <b>
+There are three setup steps needed before the pipeline can run. 
+
 1. Initializing Conda on the Cluster
+ a. Adding conda to your bash 
+ b. Loading Environments 
 2. Creating your Personal Folder on the Cluster 
 3. Downloading Pymol on your Computer 
 </b>
 
-## Conda
+## Conda :snake:
 Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. <b> You only need to run these setup steps once </b>!
 
-1. Initialize conda for your account (do this only once when you are setting this up for the first time)
+### Adding Conda to Bash  :snake:
+1. Initialize conda for your account
 <pre> /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/conda init bash </pre>
 
 2. Reload your shell
@@ -81,7 +86,7 @@ source /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh 
 <pre> conda --version  </pre>
 
 
-## Loading Conda Environments 
+### Loading Conda Environments 
 Each protein design tool needs a specific conda environment setup with necessary packages in order to run. You will load the appropriate environments from pre-made yaml files!
 
 1. Navigate to the yaml folder
@@ -123,7 +128,7 @@ conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r 
  and retry. 
 
 
- ## Creating your Personal Folder 
+ ## Creating your Personal Folder :open_file_folder:
 To keep your work organized and prevent accidental conflicts with the shared software folder, please make your own folder on the cluster to store inputs and outputs.
 
 1. Navigate to the users folder
@@ -136,7 +141,7 @@ or
 <pre> mkdir {your_name} </pre>
 
 
- ## Pymol 
+ ## Pymol :tv:
 Pymol is a protein structure visualization software. This allows you to visually inspect the structure you design throughout the pipeline steps and conduct preliminary analyses and filtering. Pymol is downloaded off the cluster, on your laptop. <b> You only need to run these setup steps once </b>!
 
 1. Download the educational Pymol [here](https://pymol.org/edu/) using your Wyss or HMS email
@@ -145,29 +150,28 @@ Pymol is a protein structure visualization software. This allows you to visually
 3. Highly recommend reviewing basic Pymol commands in the cheat sheet [here](./command_cheatsheet.md)!
 
 
-# Running the Protein Pipeline
+# Running the Protein Pipeline :runner:
 <img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
 
-
+Finally it's time for the fun stuff!
 
 The "standard" protein design pipeline is composed of 3 steps:
 
-<b><h4> 1. Backbone design </b></h4>
+<b><h3> 1. Backbone design </b></h3>
  - Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein 
  - Our pipeline uses the newest iteration of RFDiffusion3 through Rosetta Commons' Foundry, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
  - <b> Input: </b> .PDB file of your target and .JSON file containing design parameters
    <b> Output: </b> .cif.gz zipped structure file containing backbone with only alpha carbons (will be a sequence of GGGGGGs)
-<b> <h4> 2. Sequence design </b> </h4>
+<b> <h3> 2. Sequence design </b> </h3>
  - Assigns an amino acid sequence which folds into the bare backbone structure
  - Our pipeline uses ProteinMPNN (which has many subsets like LigandMPNN,ThermoMPNN depending on your application), paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
  - <b> Input: </b> .PDB file of the backbone from RFdiffusion 
  - <b> Output: </b> .fa sequence file containing amino acid sequence (chain separated by / )
-<b> <h4> 3. Structure prediction </b> </h4>
+<b> <h3> 3. Structure prediction </b> </h3>
  - Validates structure by folding into final conformation, allows for computational analysis and filtering before experimental validation
  - Our pipeline uses the newest iteration of RoseTTAFold3 through Rosetta Commons' Foundry and Colabfold, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
  - <b> Input: </b> .JSON file containing sequence(s) from the PMPNN .fa file
  - <b> Output: </b>
-
 
 For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). The official Github with documentation for each software used in the pipeline are linked in the header if you want download and adjust the models yourself. 
 
