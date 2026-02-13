@@ -1,8 +1,8 @@
 # Wyss-Institute-LCD-Protein-Design-Guide
 Greetings! This README will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
 
-<h3>
-<b> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands to reference [here](./command_cheatsheet.md). </b> </h3>h3>
+<h4>
+<b> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands to reference [here](./command_cheatsheet.md). </b> </h4>
 
 # Accessing the Cluster :computer:
 
@@ -25,9 +25,9 @@ Start by requesting an interactive session on the O2 cluster. The following comm
 <b>
 There are three setup steps needed before the pipeline can run. 
 
-1. Initializing Conda on the Cluster
- a. Adding conda to your bash 
- b. Loading Environments 
+1. Initializing Conda on the Cluster <br>
+ a. Adding conda to your bash <br>
+ b. Loading Environments <br>
 2. Creating your Personal Folder on the Cluster 
 3. Downloading Pymol on your Computer 
 </b>
@@ -35,7 +35,7 @@ There are three setup steps needed before the pipeline can run.
 ## Conda :snake:
 Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. <b> You only need to run these setup steps once </b>!
 
-### Adding Conda to Bash  :snake:
+### Adding Conda to Bash
 1. Initialize conda for your account
 <pre> /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/conda init bash </pre>
 
@@ -175,6 +175,8 @@ The "standard" protein design pipeline is composed of 3 steps:
 
 For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). The official Github with documentation for each software used in the pipeline are linked in the header if you want download and adjust the models yourself. 
 
+
+## RFDiffusion3 :art:
 1. [RFDiffusion3 (part of Rosetta Common's Foundry)](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) - Backbone Design
 a.  Load the environment, after which it should say (foundry) instead of (base) in your command line 
  <pre> conda activate foundry  </pre>
