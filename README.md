@@ -159,24 +159,29 @@ Finally it's time for the fun stuff!
 
 The "standard" protein design pipeline is composed of 3 steps:
 
-<b><h3> 1. Backbone design </b></h3>
- - Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein 
- - Our pipeline uses the newest iteration of RFDiffusion3 through Rosetta Commons' Foundry, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
- - <b> Input: </b> .PDB file of your target and .JSON file containing design parameters
-   <b> Output: </b> .cif.gz zipped structure file containing backbone with only alpha carbons (will be a sequence of GGGGGGs)
-<b> <h3> 2. Sequence design </b> </h3>
- - Assigns an amino acid sequence which folds into the bare backbone structure
- - Our pipeline uses ProteinMPNN (which has many subsets like LigandMPNN,ThermoMPNN depending on your application), paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
- - <b> Input: </b> .PDB file of the backbone from RFdiffusion 
- - <b> Output: </b> .fa sequence file containing amino acid sequence (chain separated by / )
-<b> <h3> 3. Structure prediction </b> </h3>
+<b><h3> 1. Backbone design (User Parameters -> Structure) </b></h3>
+  - Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein
+  - The cluster setup has RFDiffusion2 (CPU-only) and RFDiffusion3 through Rosetta Commons' Foundry
+  - Our recommended pipeline uses RFDiffusion3, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
+<b><h3> 2. Sequence design (Structure -> Sequence) </b></h3>
+  - Assigns an amino acid sequence which folds into the bare backbone structure
+  - - The cluster setup has LigandMPNN and ProteinMPNN
+  - Our recommended pipeline uses ProteinMPNN, paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
+<b><h3> 3. Structure prediction (Sequence -> Structure) </b></h3>
  - Validates structure by folding into final conformation, allows for computational analysis and filtering before experimental validation
- - Our pipeline uses the newest iteration of RoseTTAFold3 through Rosetta Commons' Foundry and Colabfold, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
- - <b> Input: </b> .JSON file containing sequence(s) from the PMPNN .fa file
- - <b> Output: </b>
+ - The cluster setup has Boltz, Bindcraft, Colabfold and RoseTTAFold3 through Rosetta Commons' Foundry
+ -  Our recommended pipeline uses RoseTTAFold3, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
 
-For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). The official Github with documentation for each software used in the pipeline are linked in the header if you want download and adjust the models yourself. 
+ Here's a little table which summarizes the inputs and outputs for all 3 steps:
 
+| Step | Input | Output |
+|------|-------|--------|
+| RFDiffusion3 | `.pdb` file of target structure<br>`.json` file containing design parameters | `.cif.gz` structure file containing backbone with alpha carbons only |
+| ProteinMPNN | `.pdb` file of backbone from RFdiffusion | `.fa` sequence file (chains separated by `/`) |
+| RoseTTAFold3 | `.json` file containing sequence(s) from the ProteinMPNN `.fa` file | `.cif` structure file(s) |
+
+
+For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). The official Github with documentation for each software used in the pipeline are linked in the header if you want download the models locally and adjust them yourself. 
 
 ## RFDiffusion3 :art:
 1. [RFDiffusion3 (part of Rosetta Common's Foundry)](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) - Backbone Design
