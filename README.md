@@ -2,7 +2,7 @@
 Greetings! This README will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
 
 <h4>
-<b> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands to reference [here](./command_cheatsheet.md). </b> </h4>
+<b> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands to reference [here](./command_cheatsheet.md) .</b> </h4>
 
 # Accessing the Cluster :computer:
 
@@ -24,16 +24,18 @@ Start by requesting an interactive session on the O2 cluster. The following comm
 
 <b>
 There are three setup steps needed before the pipeline can run. 
+</b>
 
 1. Initializing Conda on the Cluster <br>
  a. Adding conda to your bash <br>
  b. Loading Environments <br>
 2. Creating your Personal Folder on the Cluster 
 3. Downloading Pymol on your Computer 
-</b>
+
+<b> You only need to run these setup steps once! </b>
 
 ## Conda :snake:
-Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. <b> You only need to run these setup steps once </b>!
+Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. 
 
 ### Adding Conda to Bash
 1. Initialize conda for your account
