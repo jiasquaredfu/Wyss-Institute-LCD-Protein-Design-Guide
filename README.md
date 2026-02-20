@@ -1,8 +1,8 @@
 # Wyss-Institute-LCD-Protein-Design-Guide
 Greetings! This README will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
 
-<h4>
-<b> Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands to reference [here](command_cheatsheet.md) .</b> </h4>
+#### **Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda.  
+If you are not familiar, this page contains very helpful commands to reference [here](./command_cheatsheet.md).**
 
 # Accessing the Cluster :computer:
 
