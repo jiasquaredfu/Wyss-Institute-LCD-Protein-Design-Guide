@@ -1,7 +1,7 @@
 # Wyss-Institute-LCD-Protein-Design-Guide
 Greetings! This README will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
 
-#### :warning: Protein design work uses basic syntax in terminal/VIM, SLURM, and Conda. If you are #### not familiar, this page contains very helpful commands to reference [here](./command_cheatsheet.md). :warning:
+#### :warning: Protein design work requires knowledge of basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands to reference [here](./command_cheatsheet.md). :warning:
 
 # Accessing the Cluster :computer:
 
@@ -151,27 +151,27 @@ Pymol is a protein structure visualization software. This allows you to visually
 3. Highly recommend reviewing basic Pymol commands in the cheat sheet [here](./command_cheatsheet.md)!
 
 
-# Running the Protein Pipeline :runner:
+# Running the Pipeline :runner:
 <img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
 
 Finally it's time for the fun stuff!
 
 The "standard" protein design pipeline is composed of 3 steps:
 
-<b><h3> 1. Backbone design (User Parameters -> Structure) </b></h3>
+<b><h3> 1. Backbone design (User Parameters :arrow_right: Structure) </b></h3>
   - Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein
   - The cluster setup has RFDiffusion2 (CPU-only) and RFDiffusion3 through Rosetta Commons' Foundry
-  - Our recommended pipeline uses RFDiffusion3, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
-<b><h3> 2. Sequence design (Structure -> Sequence) </b></h3>
+  - Our recommended pipeline uses <b> RFDiffusion3 </b>, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
+<b><h3> 2. Sequence design (Structure :arrow_right: Sequence) </b></h3>
   - Assigns an amino acid sequence which folds into the bare backbone structure
   - - The cluster setup has LigandMPNN and ProteinMPNN
-  - Our recommended pipeline uses ProteinMPNN, paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
-<b><h3> 3. Structure prediction (Sequence -> Structure) </b></h3>
+  - Our recommended pipeline uses <b> ProteinMPNN </b>, paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
+<b><h3> 3. Structure prediction (Sequence :arrow_right: Structure) </b></h3>
  - Validates structure by folding into final conformation, allows for computational analysis and filtering before experimental validation
  - The cluster setup has Boltz, Bindcraft, Colabfold and RoseTTAFold3 through Rosetta Commons' Foundry
- -  Our recommended pipeline uses RoseTTAFold3, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
+ -  Our recommended pipeline uses <b> RoseTTAFold3 </b>, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
 
- Here's a little table which summarizes the inputs and outputs for all 3 steps:
+ Here's a little table which summarizes what goes in and out for all 3 steps:
 
 | Step | Input | Output |
 |------|-------|--------|
@@ -179,17 +179,14 @@ The "standard" protein design pipeline is composed of 3 steps:
 | ProteinMPNN | `.pdb` file of backbone from RFdiffusion | `.fa` sequence file (chains separated by `/`) |
 | RoseTTAFold3 | `.json` file containing sequence(s) from the ProteinMPNN `.fa` file | `.cif` structure file(s) |
 
+For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). Each software's official Github documentation are linked in the header if you want download the models locally and adjust them yourself. 
 
-For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). The official Github with documentation for each software used in the pipeline are linked in the header if you want download the models locally and adjust them yourself. 
-
-## RFDiffusion3 :art:
-1. [RFDiffusion3 (part of Rosetta Common's Foundry)](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) - Backbone Design
-a.  Load the environment, after which it should say (foundry) instead of (base) in your command line 
+## [RFDiffusion3](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) :art:
+1. Load foundry conda environment
  <pre> conda activate foundry  </pre>
-b. Create input and output folders in your personal directory 
-<pre> mkdir /input  </pre> 
-<pre> mkdir /output </pre> 
-c. Adjust SLURM script
+ Your command line should say (foundry) instead of (base) in your command line 
+2. Ensure you have a SLURM script, input and output folders for each project you are completing
+3. If you copied my directory, open the SLURM script. My examples are also in this Github [here]()
 <pre> yo  </pre> 
 
 
