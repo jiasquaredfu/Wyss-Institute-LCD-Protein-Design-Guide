@@ -133,7 +133,7 @@ conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r 
  and retry. 
 
 
- ## Creating your Personal Folder :open_file_folder:
+ ## Personal Folder :open_file_folder:
 To keep your work organized and prevent accidental conflicts with the shared software folder, please make your own folder on the cluster to store inputs and outputs.
 
 1. Navigate to the users folder
@@ -146,12 +146,12 @@ or
 <pre> mkdir {your_name} </pre>
 
 
- ## Pymol :tv:
-Pymol is a protein structure visualization software. This allows you to visually inspect the structure you design throughout the pipeline steps and conduct preliminary analyses and filtering. Pymol is downloaded off the cluster, on your laptop. <b> You only need to run these setup steps once </b>!
+ ## PyMOL :tv:
+PyMOL is a protein structure visualization software. This allows you to visually inspect the structure you design throughout the pipeline steps and conduct preliminary analyses and filtering. PyMOL is downloaded off the cluster, on your laptop. <b> You only need to run these setup steps once </b>!
 
-1. Download the educational Pymol [here](https://pymol.org/edu/) using your Wyss or HMS email
+1. Download the educational PyMOL [here](https://pymol.org/edu/) using your Wyss or HMS email
 2. You should see a UI like this, and be able to load .pdb or .cif files and play around with the structures.<img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
-3. Learn basic Pymol commands in the cheat sheet [here](./command_cheatsheet.md)!
+3. Learn basic PyMOL commands in the cheat sheet [here](./command_cheatsheet.md)!
 
 
 # Running the Pipeline :runner:
@@ -161,7 +161,7 @@ Pymol is a protein structure visualization software. This allows you to visually
 <img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
 
 :warning:
-Disclaimer! Before you embark on a design campaign, ensure you know what your target is! These newer tools like RFDiffusion3 and RoseTTAFold3 are atomistic. This means instead of inputs at a residue level, you need to specify exactly what side chain atoms you want to diffuse or design protein-protein interactions with. You may need to provide an input template for RFDiffusion. For the example in this Github repo, I supplied a constrained structure file of the HIV spike protein I want to bind to for creating an HIV minibinder. I also supplied "hotspot residues" and estimated which atoms would be most relevant for binding. The input types will depend on your application, such as binders, homooligomers, enzymes, etc. I highly recommend looking at other examples in the RFDiffusion Github for different use cases (linked in the header). Literature review before designing is extremely important! :warning:
+Disclaimer! Before you embark on a design campaign, ensure you know what your target is! These newer tools like RFDiffusion3 and RoseTTAFold3 are atomistic. This means instead of inputs at a residue level, they specify exactly what side chain atoms you want to diffuse or design protein-protein interactions with. You can still operate just at the residue level (examples below). You may need to provide an input template for RFDiffusion. For the example in this Github repo, I supplied a constrained structure file of the HIV spike protein I want to bind to for creating an HIV minibinder. I also supplied "hotspot residues" and estimated which atoms would be most relevant for binding. The input types will depend on your application, such as binders, homooligomers, enzymes, etc. I highly recommend looking at other examples in the RFDiffusion Github for different use cases (linked in the header). Literature review before designing is extremely important! :warning:
 
 The "standard" protein design pipeline is composed of 3 steps:
 ---
@@ -240,6 +240,8 @@ Now... without further ado!
 
     }
 }</pre>
+::bulb
+Note: The ligand size ranges from 3 atoms to ~80 atoms. Any less and RFdiffusion will treat it as noise, and any more heavy atoms the system destabilizes. 60-70 atoms is considered optimal. Additionally, if you only have residue level information for the hotspots, you can replace the atom designations after the : in the select_hotspots flag with "null". You also cannot specify a glycine residue as a hotspot as RFdiff3 requires side chain atoms as input. ::bulb
 
 5. Edit the SLURM script with a file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
 <pre> vi run_rfdiff3.slurm </pre> 
@@ -260,7 +262,7 @@ Now... without further ado!
 rfd3 design n_batches=1 diffusion_batch_size=2  out_dir=./output ckpt_path=../../../../software/foundry/checkpoints/rfd3_latest.ckpt inputs=./input/hiv_binder.json skip_existing=False dump_trajectories=True prevalidate_inputs=True inference_sampler.step_scale=3 inference_sampler.gamma_0=0.2
 </pre>
 
-6. Run SLURM script
+6. Run SLURM script. Debug by checking the error and output files. Error file should be empty and output should say "successfully ran inference" if it ran correctly. 
 <pre> sbatch run_rfdiff3.slurm </pre> 
 You can check the status of the run by using
 <pre> squeue -u $USER </pre> 
@@ -268,7 +270,14 @@ and cancelling the run if necessary by using
 <pre> scancel <job_ID_number> </pre> 
 
 
-7. Inspect output structure in PyMOL to ensure proper length, secondary structure, etc.
+7. Inspect output structure in PyMOL to ensure proper length, secondary structure, etc. The outputs will have a JSON with statistics and .cif.gz files. Those can be unzipped by double clicking and opened in PyMOL. Example linked [here](./rfdiff3_example/output)
+
+<img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
+
+::bulb
+Note: Chain A is the specified binding region on the input receptor and chain B is the diffused binder. Notice that the output is all glycines, this is expected! This is where ProteinMPNN comes in, to assign it a meaningful amino acid sequence. ::bulb
+
+
 
 
 
