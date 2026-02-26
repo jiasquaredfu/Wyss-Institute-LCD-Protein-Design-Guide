@@ -7,9 +7,8 @@
 #SBATCH --gres=gpu:1	# Number of GPUs
 #SBATCH --mem=32G	# Memory allocation, recommended 12-40G for RFDiffusion
 #SBATCH --cpus-per-task=8	#Number of GPUs
-#SBATCH --partition=gpu
-#SBATCH --job-name=rf3_inference
-#SBATCH --time=2:00:00
+#SBATCH --partition=gpu # Must use this or gpu_quad (only if pre-clinically affiliated PI, see O2 documentation) partition 
+#SBATCH --time=2:00:00 # Runtime for job 
 
 # Initializing environments
 module purge
