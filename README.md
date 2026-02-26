@@ -152,13 +152,13 @@ Pymol is a protein structure visualization software. This allows you to visually
 1. Download the educational Pymol [here](https://pymol.org/edu/) using your Wyss or HMS email
 2. You should see a UI like this, and be able to load .pdb or .cif files and play around with the structures. 
 <img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
-3. Highly recommend reviewing basic Pymol commands in the cheat sheet [here](./command_cheatsheet.md)!
+3. Learn basic Pymol commands in the cheat sheet [here](./command_cheatsheet.md)!
 
 
 # Running the Pipeline :runner:
 <img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
 
-Finally it's time for the fun stuff!
+<b> Finally it's time for the fun stuff! </b>
 
 The "standard" protein design pipeline is composed of 3 steps:
 
