@@ -1,0 +1,14 @@
+{
+    "hivr": {
+        "dialect": 2,
+        "infer_ori_strategy": "hotspots",
+        "input": "./bg505.pdb",
+        "contig": "20-50,/0,A350-415",
+        "select_hotspots": {
+            "A368": "OG1",
+            "A370": "CG1,CG2"
+       },
+       "is_non_loopy": true
+
+    }
+}
