@@ -9,19 +9,17 @@
 #SBATCH --partition=gpu # Must use this or gpu_quad (only if pre-clinically affiliated PI, see O2 documentation) partition -> do not change 
 #SBATCH --time=2:00:00 # Runtime for job -> change 
 
-# Load cuda
-module purge
-#module load gcc/14.2.0
-#module load cuda/12.8
 
 # Load conda and RFdiffusion environment
+module purge
 source /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh
-#conda info | grep 'base environment'
 conda activate pmpnn
 
-folder_with_pdbs="./hiv_input/" # specify input folder - > change
+# Specify input folder - > change
+folder_with_pdbs="./hiv_input/" 
 
-output_dir="./hiv_outputs/hiv" # specify output folder -> change
+# Specify output folder -> change
+output_dir="./hiv_outputs/hiv" 
 
 # Create output directory if does not exist
 if [ ! -d $output_dir ]
