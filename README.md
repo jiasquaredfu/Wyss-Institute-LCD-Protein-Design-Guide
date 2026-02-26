@@ -184,10 +184,10 @@ The "standard" protein design pipeline is composed of 3 steps:
 
 For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). Each software's official Github documentation are linked in the headers below if you want download the models locally and adjust them yourself. 
 
-::🤔
-Before you embark on a design campaign, ensure you know what your target is! These newer tools like RFDiffusion3 and RoseTTAFold3 are atomistic. This means instead of inputs at a residue level, you need to specify exactly what side chain atoms you want to diffuse or design protein-protein interactions with. You may need to provide an input template for RFDiffusion. For the example in this Github, to create a HIV minibinder, I supplied a constrained structure file of the HIV spike protein I want to bind to. I also supplied "hotspot residues" and estimated which atoms would be most relevant for binding. The input types will depend on your application, such as binders, homooligomers, enzymes, etc. I highly recommend looking at other examples in the RFDiffusion Github for different use cases. Literature review before designing is extremely important! ::🤔
+:warning:
+Before you embark on a design campaign, ensure you know what your target is! These newer tools like RFDiffusion3 and RoseTTAFold3 are atomistic. This means instead of inputs at a residue level, you need to specify exactly what side chain atoms you want to diffuse or design protein-protein interactions with. You may need to provide an input template for RFDiffusion. For the example in this Github, to create a HIV minibinder, I supplied a constrained structure file of the HIV spike protein I want to bind to. I also supplied "hotspot residues" and estimated which atoms would be most relevant for binding. The input types will depend on your application, such as binders, homooligomers, enzymes, etc. I highly recommend looking at other examples in the RFDiffusion Github for different use cases. Literature review before designing is extremely important! :warning:
 
-Now... with target established... without further ado:
+Now... with target established... without further ado!
 
 ## [RFDiffusion3](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) :art:
 
