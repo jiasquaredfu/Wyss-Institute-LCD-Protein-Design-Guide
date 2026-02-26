@@ -161,19 +161,27 @@ Pymol is a protein structure visualization software. This allows you to visually
 
 The "standard" protein design pipeline is composed of 3 steps:
 
-<b><h3> 
-1. Backbone design (User Parameters :arrow_right: Structure)</b></h3>
-  - Generates the 3D scaffold for your target design, such as a binder, enzyme or de novo protein
-  - The cluster setup has RFDiffusion2 (CPU-only) and RFDiffusion3 through Rosetta Commons' Foundry
-  - Our recommended pipeline uses <b> RFDiffusion3 </b>, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
-<b><h3>2. Sequence design (Structure :arrow_right: Sequence)</b></h3>
-- Assigns an amino acid sequence which folds into the bare backbone structure
-  - - The cluster setup has LigandMPNN and ProteinMPNN
-  - Our recommended pipeline uses <b> ProteinMPNN </b>, paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
-<b><h3>3. Structure prediction (Sequence :arrow_right: Structure) </b></h3>
- - Validates structure by folding into final conformation, allows for computational analysis and filtering before experimental validation
- - The cluster setup has Boltz, Bindcraft, Colabfold and RoseTTAFold3 through Rosetta Commons' Foundry
- -  Our recommended pipeline uses <b> RoseTTAFold3 </b>, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
+### 1. Backbone design (User Parameters → Structure)
+
+- Generates the 3D scaffold for your target design, such as a binder, enzyme, or *de novo* protein  
+- The cluster setup has RFDiffusion2 (CPU-only) and RFDiffusion3 through Rosetta Commons' Foundry  
+- Our recommended pipeline uses **RFDiffusion3**, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.09.18.676967v1)
+
+---
+
+### 2. Sequence design (Structure → Sequence)
+
+- Assigns an amino acid sequence which folds into the bare backbone structure  
+- The cluster setup has LigandMPNN and ProteinMPNN  
+- Our recommended pipeline uses **ProteinMPNN**, paper linked [here](https://www.science.org/doi/10.1126/science.add2187)
+
+---
+
+### 3. Structure prediction (Sequence → Structure)
+
+- Validates structure by folding into final conformation, allowing for computational analysis and filtering before experimental validation  
+- The cluster setup has Boltz, BindCraft, ColabFold, and RoseTTAFold3 through Rosetta Commons' Foundry  
+- Our recommended pipeline uses **RoseTTAFold3**, paper linked [here](https://www.biorxiv.org/content/10.1101/2025.08.14.670328v2)
 
  Here's a little table which summarizes what goes in and out for all 3 steps:
 
