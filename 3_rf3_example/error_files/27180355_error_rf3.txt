@@ -1,0 +1,343 @@
+/n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=configs is not available.
+  warnings.warn(
+Environment variable CCD_MIRROR_PATH not set. Will not be able to use function requiring this variable. To set it you may:
+  (1) add the line 'export VAR_NAME=path/to/variable' to your .bashrc or .zshrc file
+  (2) set it in your current shell with 'export VAR_NAME=path/to/variable'
+  (3) write it to a .env file in the root of the atomworks.io repository
+Environment variable PDB_MIRROR_PATH not set. Will not be able to use function requiring this variable. To set it you may:
+  (1) add the line 'export VAR_NAME=path/to/variable' to your .bashrc or .zshrc file
+  (2) set it in your current shell with 'export VAR_NAME=path/to/variable'
+  (3) write it to a .env file in the root of the atomworks.io repository
+17:04:45 DEBUG transforms: Debug mode is on
+17:04:49 INFO rfd3.engine: [rank: 0] Outputs will be written to /n/data1/hms/wyss/collins/lab/software/rf3_hiv_ex/output.
+17:04:49 INFO rfd3.engine: [rank: 0] Prevalidating design specification for example: hiv_binder_hivr
+17:04:49 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+17:04:51 INFO rfd3.engine: [rank: 0] Found 0 existing example IDs in the output directory.
+╭───────────────────── Traceback (most recent call last) ──────────────────────╮
+│ /n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12 │
+│ /site-packages/rfd3/cli.py:43 in design                                      │
+│                                                                              │
+│   40 │   │   from rfd3.run_inference import run_inference                    │
+│   41 │   │                                                                   │
+│   42 │   │   with suppress_warnings(is_inference=True):                      │
+│ ❱ 43 │   │   │   run_inference(cfg)                                          │
+│   44                                                                         │
+│   45                                                                         │
+│   46 if __name__ == "__main__":                                              │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │                 args = [                                                 │ │
+│ │                        │   'n_batches=1',                                │ │
+│ │                        │   'diffusion_batch_size=2',                     │ │
+│ │                        │   'out_dir=./output',                           │ │
+│ │                        │                                                 │ │
+│ │                        'ckpt_path=../foundry/checkpoints/rfd3_foundry_2… │ │
+│ │                        │   'inputs=./input/hiv_binder.json',             │ │
+│ │                        │   'skip_existing=False',                        │ │
+│ │                        │   'dump_trajectories=True',                     │ │
+│ │                        │   'prevalidate_inputs=True',                    │ │
+│ │                        │   'inference_sampler.step_scale=3',             │ │
+│ │                        │   'inference_sampler.gamma_0=0.2',              │ │
+│ │                        │   ... +1                                        │ │
+│ │                        ]                                                 │ │
+│ │                  cfg = {'ckpt_path':                                     │ │
+│ │                        '../foundry/checkpoints/rfd3_foundry_2025_12_01.… │ │
+│ │                        'num_nodes': 1, 'devices_per_node': 1, 'verbose': │ │
+│ │                        False, 'seed': None, 'inputs':                    │ │
+│ │                        './input/hiv_binder.json', 'out_dir': './output', │ │
+│ │                        '_target_': 'rfd3.engine.RFD3InferenceEngine',    │ │
+│ │                        'json_keys_subset': None, 'skip_existing': False, │ │
+│ │                        'specification': {}, 'diffusion_batch_size': 2,   │ │
+│ │                        'n_batches': 1, 'inference_sampler': {'kind':     │ │
+│ │                        'default', 'cfg_features': ['active_donor',       │ │
+│ │                        'active_acceptor', 'ref_atomwise_rasa'],          │ │
+│ │                        'use_classifier_free_guidance': False,            │ │
+│ │                        'cfg_t_max': None, 'cfg_scale': 1.5,              │ │
+│ │                        'center_option': 'all', 's_trans': 1.0,           │ │
+│ │                        'inference_noise_scaling_factor': 1.0,            │ │
+│ │                        'allow_realignment': False, 'num_timesteps': 200, │ │
+│ │                        'step_scale': 3, 'noise_scale': 1.003, 'p': 7,    │ │
+│ │                        'gamma_0': 0.2, 'gamma_min': 1.0,                 │ │
+│ │                        's_jitter_origin': 0.0}, 'cleanup_guideposts':    │ │
+│ │                        True, 'cleanup_virtual_atoms': True,              │ │
+│ │                        'read_sequence_from_sequence_head': True,         │ │
+│ │                        'output_full_json': True, 'global_prefix': None,  │ │
+│ │                        'dump_prediction_metadata_json': True,            │ │
+│ │                        'dump_trajectories': True,                        │ │
+│ │                        'align_trajectory_structures': False,             │ │
+│ │                        'prevalidate_inputs': True, 'low_memory_mode':    │ │
+│ │                        False}                                            │ │
+│ │          config_path = '/n/data1/hms/wyss/collins/lab/software/minicond… │ │
+│ │                  ctx = <click.core.Context object at 0x7fb96ba68ad0>     │ │
+│ │      dev_config_path = PosixPath('/n/data1/hms/wyss/collins/lab/softwar… │ │
+│ │ has_inference_engine = False                                             │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12 │
+│ /site-packages/hydra/main.py:83 in decorated_main                            │
+│                                                                              │
+│    80 │   │   @functools.wraps(task_function)                                │
+│    81 │   │   def decorated_main(cfg_passthrough: Optional[DictConfig] = Non │
+│    82 │   │   │   if cfg_passthrough is not None:                            │
+│ ❱  83 │   │   │   │   return task_function(cfg_passthrough)                  │
+│    84 │   │   │   else:                                                      │
+│    85 │   │   │   │   args_parser = get_args_parser()                        │
+│    86 │   │   │   │   args = args_parser.parse_args()                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ cfg_passthrough = {'ckpt_path':                                          │ │
+│ │                   '../foundry/checkpoints/rfd3_foundry_2025_12_01.ckpt', │ │
+│ │                   'num_nodes': 1, 'devices_per_node': 1, 'verbose':      │ │
+│ │                   False, 'seed': None, 'inputs':                         │ │
+│ │                   './input/hiv_binder.json', 'out_dir': './output',      │ │
+│ │                   '_target_': 'rfd3.engine.RFD3InferenceEngine',         │ │
+│ │                   'json_keys_subset': None, 'skip_existing': False,      │ │
+│ │                   'specification': {}, 'diffusion_batch_size': 2,        │ │
+│ │                   'n_batches': 1, 'inference_sampler': {'kind':          │ │
+│ │                   'default', 'cfg_features': ['active_donor',            │ │
+│ │                   'active_acceptor', 'ref_atomwise_rasa'],               │ │
+│ │                   'use_classifier_free_guidance': False, 'cfg_t_max':    │ │
+│ │                   None, 'cfg_scale': 1.5, 'center_option': 'all',        │ │
+│ │                   's_trans': 1.0, 'inference_noise_scaling_factor': 1.0, │ │
+│ │                   'allow_realignment': False, 'num_timesteps': 200,      │ │
+│ │                   'step_scale': 3, 'noise_scale': 1.003, 'p': 7,         │ │
+│ │                   'gamma_0': 0.2, 'gamma_min': 1.0, 's_jitter_origin':   │ │
+│ │                   0.0}, 'cleanup_guideposts': True,                      │ │
+│ │                   'cleanup_virtual_atoms': True,                         │ │
+│ │                   'read_sequence_from_sequence_head': True,              │ │
+│ │                   'output_full_json': True, 'global_prefix': None,       │ │
+│ │                   'dump_prediction_metadata_json': True,                 │ │
+│ │                   'dump_trajectories': True,                             │ │
+│ │                   'align_trajectory_structures': False,                  │ │
+│ │                   'prevalidate_inputs': True, 'low_memory_mode': False}  │ │
+│ │     config_name = 'inference'                                            │ │
+│ │     config_path = '/n/data1/hms/wyss/collins/lab/software/miniconda/env… │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12 │
+│ /site-packages/rfd3/run_inference.py:39 in run_inference                     │
+│                                                                              │
+│   36 │                                                                       │
+│   37 │   # Run                                                               │
+│   38 │   engine = RFD3InferenceEngine(**RFD3InferenceConfig(**init_cfg_dict) │
+│ ❱ 39 │   engine.run(**run_params)                                            │
+│   40                                                                         │
+│   41                                                                         │
+│   42 if __name__ == "__main__":                                              │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │            cfg = {'ckpt_path':                                           │ │
+│ │                  '../foundry/checkpoints/rfd3_foundry_2025_12_01.ckpt',  │ │
+│ │                  'num_nodes': 1, 'devices_per_node': 1, 'verbose':       │ │
+│ │                  False, 'seed': None, 'inputs':                          │ │
+│ │                  './input/hiv_binder.json', 'out_dir': './output',       │ │
+│ │                  '_target_': 'rfd3.engine.RFD3InferenceEngine',          │ │
+│ │                  'json_keys_subset': None, 'skip_existing': False,       │ │
+│ │                  'specification': {}, 'diffusion_batch_size': 2,         │ │
+│ │                  'n_batches': 1, 'inference_sampler': {'kind':           │ │
+│ │                  'default', 'cfg_features': ['active_donor',             │ │
+│ │                  'active_acceptor', 'ref_atomwise_rasa'],                │ │
+│ │                  'use_classifier_free_guidance': False, 'cfg_t_max':     │ │
+│ │                  None, 'cfg_scale': 1.5, 'center_option': 'all',         │ │
+│ │                  's_trans': 1.0, 'inference_noise_scaling_factor': 1.0,  │ │
+│ │                  'allow_realignment': False, 'num_timesteps': 200,       │ │
+│ │                  'step_scale': 3, 'noise_scale': 1.003, 'p': 7,          │ │
+│ │                  'gamma_0': 0.2, 'gamma_min': 1.0, 's_jitter_origin':    │ │
+│ │                  0.0}, 'cleanup_guideposts': True,                       │ │
+│ │                  'cleanup_virtual_atoms': True,                          │ │
+│ │                  'read_sequence_from_sequence_head': True,               │ │
+│ │                  'output_full_json': True, 'global_prefix': None,        │ │
+│ │                  'dump_prediction_metadata_json': True,                  │ │
+│ │                  'dump_trajectories': True,                              │ │
+│ │                  'align_trajectory_structures': False,                   │ │
+│ │                  'prevalidate_inputs': True, 'low_memory_mode': False}   │ │
+│ │       cfg_dict = {                                                       │ │
+│ │                  │   'ckpt_path':                                        │ │
+│ │                  '../foundry/checkpoints/rfd3_foundry_2025_12_01.ckpt',  │ │
+│ │                  │   'num_nodes': 1,                                     │ │
+│ │                  │   'devices_per_node': 1,                              │ │
+│ │                  │   'verbose': False,                                   │ │
+│ │                  │   'seed': None,                                       │ │
+│ │                  │   'inputs': './input/hiv_binder.json',                │ │
+│ │                  │   'out_dir': './output',                              │ │
+│ │                  │   '_target_': 'rfd3.engine.RFD3InferenceEngine',      │ │
+│ │                  │   'json_keys_subset': None,                           │ │
+│ │                  │   'skip_existing': False,                             │ │
+│ │                  │   ... +14                                             │ │
+│ │                  }                                                       │ │
+│ │         engine = <rfd3.engine.RFD3InferenceEngine object at              │ │
+│ │                  0x7fb8406c2660>                                         │ │
+│ │  init_cfg_dict = {                                                       │ │
+│ │                  │   'ckpt_path':                                        │ │
+│ │                  '../foundry/checkpoints/rfd3_foundry_2025_12_01.ckpt',  │ │
+│ │                  │   'num_nodes': 1,                                     │ │
+│ │                  │   'devices_per_node': 1,                              │ │
+│ │                  │   'verbose': False,                                   │ │
+│ │                  │   'seed': None,                                       │ │
+│ │                  │   'json_keys_subset': None,                           │ │
+│ │                  │   'skip_existing': False,                             │ │
+│ │                  │   'specification': {},                                │ │
+│ │                  │   'diffusion_batch_size': 2,                          │ │
+│ │                  │   'inference_sampler': {                              │ │
+│ │                  │   │   'kind': 'default',                              │ │
+│ │                  │   │   'cfg_features': [                               │ │
+│ │                  │   │   │   'active_donor',                             │ │
+│ │                  │   │   │   'active_acceptor',                          │ │
+│ │                  │   │   │   'ref_atomwise_rasa'                         │ │
+│ │                  │   │   ],                                              │ │
+│ │                  │   │   'use_classifier_free_guidance': False,          │ │
+│ │                  │   │   'cfg_t_max': None,                              │ │
+│ │                  │   │   'cfg_scale': 1.5,                               │ │
+│ │                  │   │   'center_option': 'all',                         │ │
+│ │                  │   │   's_trans': 1.0,                                 │ │
+│ │                  │   │   'inference_noise_scaling_factor': 1.0,          │ │
+│ │                  │   │   'allow_realignment': False,                     │ │
+│ │                  │   │   'num_timesteps': 200,                           │ │
+│ │                  │   │   ... +6                                          │ │
+│ │                  │   },                                                  │ │
+│ │                  │   ... +10                                             │ │
+│ │                  }                                                       │ │
+│ │     run_params = {                                                       │ │
+│ │                  │   'inputs': './input/hiv_binder.json',                │ │
+│ │                  │   'out_dir': './output',                              │ │
+│ │                  │   'n_batches': 1                                      │ │
+│ │                  }                                                       │ │
+│ │ run_params_set = {'inputs', 'out_dir', 'n_batches'}                      │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12 │
+│ /site-packages/rfd3/engine.py:223 in run                                     │
+│                                                                              │
+│   220 │   │   │   design_specifications, self.inference_sampler_overrides    │
+│   221 │   │   )                                                              │
+│   222 │   │   # init before                                                  │
+│ ❱ 223 │   │   self.initialize()                                              │
+│   224 │   │   outputs = self._run_multi(design_specifications)               │
+│   225 │   │   return outputs                                                 │
+│   226                                                                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ design_specifications = {                                                │ │
+│ │                         │   'hiv_binder_hivr_0': {                       │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'infer_ori_strategy': 'hotspots',        │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/n/data1/hms/wyss/collins/lab/software/rf3_hiv… │ │
+│ │                         │   │   'contig': '20-50,/0,A350-415',           │ │
+│ │                         │   │   'select_hotspots': {                     │ │
+│ │                         │   │   │   'A368': 'OG1',                       │ │
+│ │                         │   │   │   'A370': 'CG1,CG2'                    │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'extra': {                               │ │
+│ │                         │   │   │   'example': 'hivr',                   │ │
+│ │                         │   │   │   'task_name': 'hiv_binder_hivr'       │ │
+│ │                         │   │   }                                        │ │
+│ │                         │   }                                            │ │
+│ │                         }                                                │ │
+│ │                inputs = {                                                │ │
+│ │                         │   'hiv_binder_hivr': {                         │ │
+│ │                         │   │   'dialect': 2,                            │ │
+│ │                         │   │   'infer_ori_strategy': 'hotspots',        │ │
+│ │                         │   │   'input':                                 │ │
+│ │                         '/n/data1/hms/wyss/collins/lab/software/rf3_hiv… │ │
+│ │                         │   │   'contig': '20-50,/0,A350-415',           │ │
+│ │                         │   │   'select_hotspots': {                     │ │
+│ │                         │   │   │   'A368': 'OG1',                       │ │
+│ │                         │   │   │   'A370': 'CG1,CG2'                    │ │
+│ │                         │   │   },                                       │ │
+│ │                         │   │   'is_non_loopy': True,                    │ │
+│ │                         │   │   'extra': {                               │ │
+│ │                         │   │   │   'example': 'hivr',                   │ │
+│ │                         │   │   │   'task_name': 'hiv_binder_hivr'       │ │
+│ │                         │   │   }                                        │ │
+│ │                         │   }                                            │ │
+│ │                         }                                                │ │
+│ │             n_batches = 1                                                │ │
+│ │               out_dir = './output'                                       │ │
+│ │                  self = <rfd3.engine.RFD3InferenceEngine object at       │ │
+│ │                         0x7fb8406c2660>                                  │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12 │
+│ /site-packages/foundry/inference_engines/base.py:133 in initialize           │
+│                                                                              │
+│   130 │   │   ranked_logger.info(                                            │
+│   131 │   │   │   f"Loading checkpoint from {Path(self.ckpt_path).resolve()} │
+│   132 │   │   )                                                              │
+│ ❱ 133 │   │   checkpoint = torch.load(self.ckpt_path, "cpu", weights_only=Fa │
+│   134 │   │   cfg = self._override_checkpoint_config(checkpoint["train_cfg"] │
+│   135 │   │                                                                  │
+│   136 │   │   # Load pipeline first before trainer/model                     │
+│                                                                              │
+│ ╭───────────────────────────── locals ──────────────────────────────╮        │
+│ │ self = <rfd3.engine.RFD3InferenceEngine object at 0x7fb8406c2660> │        │
+│ ╰───────────────────────────────────────────────────────────────────╯        │
+│                                                                              │
+│ /n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12 │
+│ /site-packages/torch/serialization.py:1479 in load                           │
+│                                                                              │
+│   1476 │   if "encoding" not in pickle_load_args.keys():                     │
+│   1477 │   │   pickle_load_args["encoding"] = "utf-8"                        │
+│   1478 │                                                                     │
+│ ❱ 1479 │   with _open_file_like(f, "rb") as opened_file:                     │
+│   1480 │   │   if _is_zipfile(opened_file):                                  │
+│   1481 │   │   │   # The zipfile reader is going to advance the current file │
+│   1482 │   │   │   # If we want to actually tail call to torch.jit.load, we  │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │                     config = <module 'torch.utils.serialization.config'  │ │
+│ │                              from                                        │ │
+│ │                              '/n/data1/hms/wyss/collins/lab/software/mi… │ │
+│ │               DOCS_MESSAGE = '\n\nCheck the documentation of torch.load  │ │
+│ │                              to learn more about types accepted by       │ │
+│ │                              de'+82                                      │ │
+│ │                          f = PosixPath('/n/data1/hms/wyss/collins/lab/s… │ │
+│ │ force_no_weights_only_load = False                                       │ │
+│ │    force_weights_only_load = False                                       │ │
+│ │               map_location = 'cpu'                                       │ │
+│ │                       mmap = False                                       │ │
+│ │           pickle_load_args = {'encoding': 'utf-8'}                       │ │
+│ │              pickle_module = <module 'pickle' from                       │ │
+│ │                              '/n/data1/hms/wyss/collins/lab/software/mi… │ │
+│ │                true_values = ['1', 'y', 'yes', 'true']                   │ │
+│ │               weights_only = False                                       │ │
+│ │       weights_only_not_set = False                                       │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12 │
+│ /site-packages/torch/serialization.py:759 in _open_file_like                 │
+│                                                                              │
+│    756                                                                       │
+│    757 def _open_file_like(name_or_buffer: FileLike, mode: str) -> _opener[I │
+│    758 │   if _is_path(name_or_buffer):                                      │
+│ ❱  759 │   │   return _open_file(name_or_buffer, mode)                       │
+│    760 │   else:                                                             │
+│    761 │   │   if "w" in mode:                                               │
+│    762 │   │   │   return _open_buffer_writer(name_or_buffer)                │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │           mode = 'rb'                                                    │ │
+│ │ name_or_buffer = PosixPath('/n/data1/hms/wyss/collins/lab/software/foun… │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+│                                                                              │
+│ /n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12 │
+│ /site-packages/torch/serialization.py:740 in __init__                        │
+│                                                                              │
+│    737                                                                       │
+│    738 class _open_file(_opener[IO[bytes]]):                                 │
+│    739 │   def __init__(self, name: Union[str, os.PathLike[str]], mode: str) │
+│ ❱  740 │   │   super().__init__(open(name, mode))                            │
+│    741 │                                                                     │
+│    742 │   def __exit__(self, *args):                                        │
+│    743 │   │   self.file_like.close()                                        │
+│                                                                              │
+│ ╭───────────────────────────────── locals ─────────────────────────────────╮ │
+│ │ mode = 'rb'                                                              │ │
+│ │ name = PosixPath('/n/data1/hms/wyss/collins/lab/software/foundry/checkp… │ │
+│ │ self = <torch.serialization._open_file object at 0x7fb831295fd0>         │ │
+│ ╰──────────────────────────────────────────────────────────────────────────╯ │
+╰──────────────────────────────────────────────────────────────────────────────╯
+FileNotFoundError: [Errno 2] No such file or directory: 
+'/n/data1/hms/wyss/collins/lab/software/foundry/checkpoints/rfd3_foundry_2025_12
+_01.ckpt'

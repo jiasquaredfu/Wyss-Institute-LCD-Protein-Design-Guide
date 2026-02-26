@@ -1,0 +1,17 @@
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/condabin/conda
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/conda
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/conda-env
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/activate
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/bin/deactivate
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/fish/conf.d/conda.fish
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/shell/condabin/Conda.psm1
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/shell/condabin/conda-hook.ps1
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/lib/python3.13/site-packages/xontrib/conda.xsh
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.csh
+no change     /home/daf6615/.bashrc
+No action taken.
+CUDA_VISIBLE_DEVICES=0
+CUDA available: True
+Device: NVIDIA L40S
+CUDA version: 12.6

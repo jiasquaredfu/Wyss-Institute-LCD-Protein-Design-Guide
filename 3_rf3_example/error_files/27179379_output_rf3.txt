@@ -1,0 +1,13 @@
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/condabin/conda
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/bin/conda
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/bin/conda-env
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/bin/activate
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/bin/deactivate
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/etc/profile.d/conda.sh
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/etc/fish/conf.d/conda.fish
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/shell/condabin/Conda.psm1
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/shell/condabin/conda-hook.ps1
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/lib/python3.13/site-packages/xontrib/conda.xsh
+no change     /n/data1/hms/wyss/collins/lab/software/miniconda/etc/profile.d/conda.csh
+no change     /home/daf6615/.bashrc
+No action taken.

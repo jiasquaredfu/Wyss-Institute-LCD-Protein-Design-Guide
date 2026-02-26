@@ -1,0 +1,16 @@
+[
+	{
+		"name": "hiv_receptor",
+		"components": [
+			{
+				"seq": "EFFYCNTSGLFNSTWISNTSVQGSNSTGSNDSITLPCRIKQIINMWQRIGQAMYAPPIQGVIRCVS",
+				"chain_id": "A"
+			},
+			{
+				"seq": "AEVEELLKKAEAIGWSEKEKFNAALKAAVKAAA",
+				"chain_id": "B"
+			}
+		]	
+	}
+
+]

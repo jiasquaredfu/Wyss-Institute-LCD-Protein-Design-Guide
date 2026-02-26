@@ -1,0 +1,81 @@
+11:15:41 DEBUG transforms: Debug mode is on
+11:15:41 INFO rf3.inference_engines.rf3: [rank: 0] Loading checkpoint from /n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/checkpoints/rf3_foundry_01_24_latest.ckpt...
+11:15:51 WARNING atomworks.ml: Using element type for atom names of atomized tokens.
+Using bfloat16 Automatic Mixed Precision (AMP)
+You are using a CUDA device ('NVIDIA L40S') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+11:15:56 WARNING rf3.inference_engines.rf3: [rank: 0] out_dir is None - results will be returned in memory! If you want to save to disk, please provide an out_dir.
+concurrent.futures.process._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/concurrent/futures/process.py", line 264, in _process_worker
+    r = call_item.fn(*call_item.args, **call_item.kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/models/rf3/src/rf3/utils/inference.py", line 321, in _process_single_path
+    data = json.load(f)
+           ^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/json/__init__.py", line 293, in load
+    return loads(fp.read(),
+           ^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/json/decoder.py", line 338, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/json/decoder.py", line 354, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 13 column 3 (char 241)
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/bin/rf3", line 7, in <module>
+    sys.exit(app())
+             ^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/main.py", line 336, in __call__
+    raise e
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/main.py", line 319, in __call__
+    return get_command(self)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 1485, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/core.py", line 814, in main
+    return _main(
+           ^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/core.py", line 190, in _main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 1873, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/main.py", line 706, in wrapper
+    return callback(**use_params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/models/rf3/src/rf3/cli.py", line 69, in fold
+    run_inference(cfg)
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/hydra/main.py", line 83, in decorated_main
+    return task_function(cfg_passthrough)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/models/rf3/src/rf3/inference.py", line 63, in run_inference
+    inference_engine.run(**run_params)
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/models/rf3/src/rf3/inference_engines/rf3.py", line 469, in run
+    inference_inputs = prepare_inference_inputs_from_paths(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/models/rf3/src/rf3/utils/inference.py", line 422, in prepare_inference_inputs_from_paths
+    result = future.result()
+             ^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 13 column 3 (char 241)

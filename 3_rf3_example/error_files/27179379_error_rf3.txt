@@ -1,0 +1,2 @@
+/var/spool/slurmd/job27179379/slurm_script: line 24: syntax error near unexpected token `'is cuda available:''
+/var/spool/slurmd/job27179379/slurm_script: line 24: `print('is cuda available:')'

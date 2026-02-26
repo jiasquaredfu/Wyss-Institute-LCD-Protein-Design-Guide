@@ -1,0 +1,57 @@
+11:05:51 DEBUG transforms: Debug mode is on
+11:05:52 INFO rf3.inference_engines.rf3: [rank: 0] Loading checkpoint from /n/data1/hms/wyss/collins/lab/users/jiajia/3_rf3/hiv_ex/software/1_backbone_design/foundry/checkpoints/rf3_foundry_01_24_latest.ckpt...
+Traceback (most recent call last):
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/bin/rf3", line 7, in <module>
+    sys.exit(app())
+             ^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/main.py", line 336, in __call__
+    raise e
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/main.py", line 319, in __call__
+    return get_command(self)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 1485, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/core.py", line 814, in main
+    return _main(
+           ^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/core.py", line 190, in _main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 1873, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/main.py", line 706, in wrapper
+    return callback(**use_params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/models/rf3/src/rf3/cli.py", line 69, in fold
+    run_inference(cfg)
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/hydra/main.py", line 83, in decorated_main
+    return task_function(cfg_passthrough)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/models/rf3/src/rf3/inference.py", line 63, in run_inference
+    inference_engine.run(**run_params)
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/models/rf3/src/rf3/inference_engines/rf3.py", line 416, in run
+    self.initialize()
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/models/rf3/src/rf3/inference_engines/rf3.py", line 346, in initialize
+    cfg = super().initialize()
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/modelforge/src/foundry/inference_engines/base.py", line 133, in initialize
+    checkpoint = torch.load(self.ckpt_path, "cpu", weights_only=False)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/torch/serialization.py", line 1479, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/torch/serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/torch/serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/n/data1/hms/wyss/collins/lab/users/jiajia/3_rf3/hiv_ex/software/1_backbone_design/foundry/checkpoints/rf3_foundry_01_24_latest.ckpt'

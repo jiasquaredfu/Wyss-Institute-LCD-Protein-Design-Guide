@@ -1,0 +1,28 @@
+/n/data1/hms/wyss/collins/lab/software/miniconda/envs/foundry/lib/python3.12/site-packages/hydra/_internal/config_loader_impl.py:216: UserWarning: provider=hydra.searchpath in main, path=configs is not available.
+  warnings.warn(
+Environment variable CCD_MIRROR_PATH not set. Will not be able to use function requiring this variable. To set it you may:
+  (1) add the line 'export VAR_NAME=path/to/variable' to your .bashrc or .zshrc file
+  (2) set it in your current shell with 'export VAR_NAME=path/to/variable'
+  (3) write it to a .env file in the root of the atomworks.io repository
+Environment variable PDB_MIRROR_PATH not set. Will not be able to use function requiring this variable. To set it you may:
+  (1) add the line 'export VAR_NAME=path/to/variable' to your .bashrc or .zshrc file
+  (2) set it in your current shell with 'export VAR_NAME=path/to/variable'
+  (3) write it to a .env file in the root of the atomworks.io repository
+15:04:27 DEBUG transforms: Debug mode is on
+15:04:33 INFO rfd3.engine: [rank: 0] Outputs will be written to /n/data1/hms/wyss/collins/lab/software/rfd3_hiv_ex/output.
+15:04:33 INFO rfd3.engine: [rank: 0] Prevalidating design specification for example: hiv_binder_insulinr
+15:04:33 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:04:36 INFO rfd3.engine: [rank: 0] Found 0 existing example IDs in the output directory.
+Using bfloat16 Automatic Mixed Precision (AMP)
+You are using a CUDA device ('NVIDIA L40S') that has Tensor Cores. To properly utilize them, you should set `torch.set_float32_matmul_precision('medium' | 'high')` which will trade-off precision for performance. For more details, read https://pytorch.org/docs/stable/generated/torch.set_float32_matmul_precision.html#torch.set_float32_matmul_precision
+15:04:49 WARNING atomworks.io: We can't fix formal charges without building from templates, as we need to know the true number of hydrogens bonded to a given atom, not the inferred number. This may lead to occasional inaccuracies after adding inter-residue bonds. To avoid this and fix formal charges, set `add_missing_atoms = True`.
+15:04:51 WARNING atomworks.io: The `extra_fields` argument will be ignored if there is no CIF file input.
+15:05:18 INFO rfd3.engine: [rank: 0] Finished inference batch in 26.34 seconds.
+15:05:26 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_insulinr_0_model_0 written to /n/data1/hms/wyss/collins/lab/software/rfd3_hiv_ex/output/hiv_binder_insulinr_0_model_0.
+15:05:34 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_insulinr_0_model_1 written to /n/data1/hms/wyss/collins/lab/software/rfd3_hiv_ex/output/hiv_binder_insulinr_0_model_1.
+15:05:42 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_insulinr_0_model_2 written to /n/data1/hms/wyss/collins/lab/software/rfd3_hiv_ex/output/hiv_binder_insulinr_0_model_2.
+15:05:50 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_insulinr_0_model_3 written to /n/data1/hms/wyss/collins/lab/software/rfd3_hiv_ex/output/hiv_binder_insulinr_0_model_3.
+15:05:59 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_insulinr_0_model_4 written to /n/data1/hms/wyss/collins/lab/software/rfd3_hiv_ex/output/hiv_binder_insulinr_0_model_4.
+15:06:07 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_insulinr_0_model_5 written to /n/data1/hms/wyss/collins/lab/software/rfd3_hiv_ex/output/hiv_binder_insulinr_0_model_5.
+15:06:15 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_insulinr_0_model_6 written to /n/data1/hms/wyss/collins/lab/software/rfd3_hiv_ex/output/hiv_binder_insulinr_0_model_6.
+15:06:23 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_insulinr_0_model_7 written to /n/data1/hms/wyss/collins/lab/software/rfd3_hiv_ex/output/hiv_binder_insulinr_0_model_7.

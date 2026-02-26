@@ -1,0 +1,40 @@
+Traceback (most recent call last):
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/bin/rf3", line 7, in <module>
+    sys.exit(app())
+             ^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/main.py", line 336, in __call__
+    raise e
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/main.py", line 319, in __call__
+    return get_command(self)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 1485, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/core.py", line 814, in main
+    return _main(
+           ^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/core.py", line 190, in _main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 1873, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/typer/main.py", line 706, in wrapper
+    return callback(**use_params)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/rf3/cli.py", line 67, in fold
+    from rf3.inference import run_inference
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/rf3/inference.py", line 15, in <module>
+    rootutils.setup_root(__file__, indicator=".project-root", pythonpath=True)
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/rootutils/rootutils.py", line 148, in setup_root
+    path = find_root(search_from, indicator)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda3/envs/foundry/lib/python3.12/site-packages/rootutils/rootutils.py", line 70, in find_root
+    raise FileNotFoundError(f"Project root directory not found. Indicators: {indicator}")
+FileNotFoundError: Project root directory not found. Indicators: ['.project-root']
