@@ -476,12 +476,12 @@ Those can be unzipped by transferring from the cluster to your local computer, d
 ---
 ### Congrats!
 
-Now you have your very own <i> de novo </i> designed protein.
+Now you have your very own <i> de novo </i> designed protein :D
 
 ---
 ### Filtering 
 
-
+Now that you are a master protein designer, we need to scale up. If we are designing proteins high-throughput on the scale of thousands, how can we assess which designs are best for your application?
 
 
 
