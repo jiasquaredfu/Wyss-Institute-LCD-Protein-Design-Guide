@@ -156,9 +156,12 @@ Pymol is a protein structure visualization software. This allows you to visually
 
 # Running the Pipeline :runner:
 
+<b> FINALLY, it's time for the fun stuff! </b>
+
 <img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
 
-<b> FINALLY, it's time for the fun stuff! </b>
+:warning:
+Disclaimer! Before you embark on a design campaign, ensure you know what your target is! These newer tools like RFDiffusion3 and RoseTTAFold3 are atomistic. This means instead of inputs at a residue level, you need to specify exactly what side chain atoms you want to diffuse or design protein-protein interactions with. You may need to provide an input template for RFDiffusion. For the example in this Github repo, I supplied a constrained structure file of the HIV spike protein I want to bind to for creating an HIV minibinder. I also supplied "hotspot residues" and estimated which atoms would be most relevant for binding. The input types will depend on your application, such as binders, homooligomers, enzymes, etc. I highly recommend looking at other examples in the RFDiffusion Github for different use cases (linked in the header). Literature review before designing is extremely important! :warning:
 
 The "standard" protein design pipeline is composed of 3 steps:
 ---
@@ -197,8 +200,6 @@ The "standard" protein design pipeline is composed of 3 steps:
 For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). Each software's official Github documentation are linked in the headers below if you want download the models locally and adjust them yourself. 
 
 ---
-:warning:
-Before you embark on a design campaign, ensure you know what your target is! These newer tools like RFDiffusion3 and RoseTTAFold3 are atomistic. This means instead of inputs at a residue level, you need to specify exactly what side chain atoms you want to diffuse or design protein-protein interactions with. You may need to provide an input template for RFDiffusion. For the example in this Github, to create a HIV minibinder, I supplied a constrained structure file of the HIV spike protein I want to bind to. I also supplied "hotspot residues" and estimated which atoms would be most relevant for binding. The input types will depend on your application, such as binders, homooligomers, enzymes, etc. I highly recommend looking at other examples in the RFDiffusion Github for different use cases. Literature review before designing is extremely important! :warning:
 
 :warning:
 If you need to run GPU-dependent tools quickly (for example, your RFdiffusion SLURM job is stuck in queue for hours or days!) run the following line:
@@ -206,7 +207,7 @@ If you need to run GPU-dependent tools quickly (for example, your RFdiffusion SL
 and run the scripts directly (copy the last execution lines in the slurm files directly into terminal after this line). If this also queues for a long time, reducing the time (-t) and memory allocation (--mem) may get you allocated compute faster. 
 :warning:
 
-Now... with target established... without further ado!
+Now... without further ado!
 ---
 
 ## [RFDiffusion3](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) :art:
@@ -255,9 +256,20 @@ Now... with target established... without further ado!
 #SBATCH --partition=gpu # Must use this or gpu_quad (only if pre-clinically affiliated PI, see O2 documentation) partition -> do not change 
 #SBATCH --time=2:00:00 # Runtime for job -> change 
 
-# RFDiffusion run inference commands -> change n_batches, diffusion_batch_size (number of outputs per run), inputs (.json input name), 
+# RFDiffusion run inference commands -> change n_batches (number of outputs per run), diffusion_batch_size (number of trajectories per diffusion step, only affects GPU usage), inputs (.json input name), 
 rfd3 design n_batches=1 diffusion_batch_size=2  out_dir=./output ckpt_path=../../../../software/foundry/checkpoints/rfd3_latest.ckpt inputs=./input/hiv_binder.json skip_existing=False dump_trajectories=True prevalidate_inputs=True inference_sampler.step_scale=3 inference_sampler.gamma_0=0.2
 </pre>
+
+6. Run SLURM script
+<pre> sbatch run_rfdiff3.slurm </pre> 
+You can check the status of the run by using
+<pre> squeue -u $USER </pre> 
+and cancelling the run if necessary by using 
+<pre> scancel <job_ID_number> </pre> 
+
+
+7. Inspect output structure in PyMOL to ensure proper length, secondary structure, etc.
+
 
 
 
