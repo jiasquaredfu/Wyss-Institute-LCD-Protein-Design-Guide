@@ -1,5 +1,5 @@
 # HMS IT O2 CLuster
-Detailed cluster-specific documentation such as how to access GPUs, troubleshooting SLURM runs, and all other infrastrcture questions for  can be found [here](https://harvardmed.atlassian.net/wiki/spaces/O2/overview?homepageId=1586790623)!
+Detailed cluster-specific documentation such as how to access GPUs, troubleshooting SLURM runs, and all other computational infrastructure questions can be found [here](https://harvardmed.atlassian.net/wiki/spaces/O2/overview?homepageId=1586790623)!
 
 # Navigating Terminal with Linux
 Before starting any computational work, having basic familiarity with Unix/Linux will allow you to navigate and interact with all the software you will use! Going into your Terminal and testing out these commands is a good way to get some hands-on practice. 
