@@ -290,7 +290,7 @@ Note: Press the SEQ button on the bottom right of PyMOL to see sequence informat
 :bulb:
 Note: This pipeline still uses the original ProteinMPNN implementation as the foundry version is still working through bugs! :bulb:
 
-1. Load proteinmpnn conda environment
+1. Load ProteinMPNN conda environment
 
 <pre> conda activate pmpnn </pre>
  Your command line should say (pmpnn) instead of (base) to the left of your cursor
@@ -301,58 +301,84 @@ Note: This pipeline still uses the original ProteinMPNN implementation as the fo
 
 3. Edit the SLURM script with a file editor. Example linked [here](./pmpnn_example/run_pmpnn.slurm)
 
-<pre> vi input/hiv_binder.json </pre>
-
-<pre> {
-    "hivr": {
-        "dialect": 2,
-        "infer_ori_strategy": "hotspots", 
-        "input": "./bg505.pdb", # input -> change
-        "contig": "20-50,/0,A350-415", # 20-50 is length of binder, /0 is chain break to prevent fusing of binder to receptor structure, A350-415 is the motif scaffold of receptor residues 350-415 of chain A   
-        "select_hotspots": { # residues and atoms for binder to contact -> change
-            "A368": "OG1",
-            "A370": "CG1,CG2"
-       },
-       "is_non_loopy": true
-
-    }
-}</pre>
-:bulb:
-Note: The ligand size ranges from 3 atoms to ~80 atoms. Any less and RFdiffusion will treat it as noise, and any more heavy atoms the system destabilizes. 60-70 atoms is considered optimal. Additionally, if you only have residue level information for the hotspots, you can replace the atom designations after the : in the select_hotspots flag with "null". You also cannot specify a glycine residue as a hotspot as RFdiff3 requires side chain atoms as input. :bulb:
-
-5. Edit the SLURM script with a file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
-<pre> vi run_rfdiff3.slurm </pre> 
+<pre> vi run_pmpnn.slurm </pre> 
 
 <pre>
-#!/bin/bash
+!/bin/bash
  
-#SBATCH --job-name=hiv_ex # Job name in SLURM	-> change 
-#SBATCH --output=%j_output_rfdiff3.txt   # Output file 
-#SBATCH --error=%j_error_rfdiff3.txt     # Error file 
+#SBATCH --job-name=pmpnn_hiv_ex # Job name in SLURM	-> change 
+#SBATCH --output=%j_output_pmpnn.txt   # Output file 
+#SBATCH --error=%j_error_pmpnn.txt     # Error file 
 #SBATCH --gres=gpu:1	# Number of GPUs -> do not change 
-#SBATCH --mem=32G	# Memory allocation -> do not change, recommended 12-40G for RFDiffusion
+#SBATCH --mem=32G	# Memory allocation -> do not change, recommended 12-40G 
 #SBATCH --cpus-per-task=8	#Number of GPUs -> do not change 
 #SBATCH --partition=gpu # Must use this or gpu_quad (only if pre-clinically affiliated PI, see O2 documentation) partition -> do not change 
 #SBATCH --time=2:00:00 # Runtime for job -> change 
 
-# RFDiffusion run inference commands -> change n_batches (number of outputs per run), diffusion_batch_size (number of trajectories per diffusion step, only affects GPU usage), inputs (.json input name), 
-rfd3 design n_batches=1 diffusion_batch_size=2  out_dir=./output ckpt_path=../../../../software/foundry/checkpoints/rfd3_latest.ckpt inputs=./input/hiv_binder.json skip_existing=False dump_trajectories=True prevalidate_inputs=True inference_sampler.step_scale=3 inference_sampler.gamma_0=0.2
+# Load conda and RFdiffusion environment
+module purge
+source /n/data1/hms/wyss/collins/lab/software/miniconda3/etc/profile.d/conda.sh
+conda activate pmpnn
+
+# Specify input folder - > change
+folder_with_pdbs="./hiv_input/" 
+
+# Specify output folder -> change
+output_dir="./hiv_outputs/hiv" 
+
+# Create output directory if does not exist
+if [ ! -d $output_dir ]
+then
+    mkdir -p $output_dir
+fi
+
+path_for_parsed_chains=$output_dir"/parsed_pdbs.jsonl"
+
+python ../helper_scripts/parse_multiple_chains.py --input_path=$folder_with_pdbs --output_path=$path_for_parsed_chains
+
+# ProteinMPNN run inference commands
+python ../protein_mpnn_run.py \
+        --jsonl_path $path_for_parsed_chains \
+        --out_folder $output_dir \ 
+        --num_seq_per_target 1 \ -> number of output sequences per run -> change
+        --sampling_temp "0.1" \
+        --seed 37 \
+        --batch_size 1
 </pre>
 
-6. Run SLURM script. Debug by checking the error and output files. Error file should be empty and output should say "successfully ran inference" if it ran correctly. 
-<pre> sbatch run_rfdiff3.slurm </pre> 
+4. Run SLURM script. Debug by checking the error and output files.
+<pre> sbatch run_pmpnn.slurm </pre> 
 You can check the status of the run by using
 <pre> squeue -u $USER </pre> 
 and cancelling the run if necessary by using 
 <pre> scancel <job_ID_number> </pre> 
 
+Error file should be empty and output should say something like this at the bottom if it ran correctly. 
+<pre> Number of edges: 48
+Training noise level: 0.2A
+Generating sequences for: hiv_0
+1 sequences of length 99 generated in 0.3514 seconds </pre> 
 
-7. Inspect output structure in PyMOL to ensure proper length, secondary structure, etc. The outputs will have a JSON with statistics and .cif.gz files. Those can be unzipped by double clicking and opened in PyMOL. Example linked [here](./rfdiff3_example/output)
+                                                   
+5. Inspect output sequence to ensure proper length, secondary structure, etc. The output will be a .FA file within subfolders with a path like this:
+<pre>/n/data1/hms/wyss/collins/lab/users/jiajia/2_pmpnn/hiv_ex/output/hiv/seqs </pre>
 
-<img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
+View the file with a file editor. Example linked [here](./pmpnn_example/output/hiv/seqs/hiv_0.fa).
 
 :bulb:
-Note: Press the SEQ button on the bottom right of PyMOL to see sequence information. Chain A is the specified binding region on the input receptor and chain B is the diffused binder. Notice that the binder output is all glycines, this is expected! This is where ProteinMPNN comes in, to assign it a meaningful amino acid sequence. :bulb:
+Note: ProteinMPNN redesigns the input receptor sequence as well as the binder! Do not be alarmed if your sequence for the fixed receptor also changes. If this happens, ensure for the next step you are using the ORIGINAL receptor/input sequence. :bulb:
+
+<pre>
+>hiv_0, score=2.8675, global_score=2.8675, fixed_chains=[], designed_chains=['A', 'B'], model_name=v_48_020, git_hash=8907e6671bfbfc92303b5f79c4b5e6ce47cdef57, seed=37
+EFFYCNTSGLFNSTWISNTSVQGSNSTGSNDSITLPCRIKQIINMWQRIGQAMYAPPIQGVIRCVS/GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+^ USE THIS ORIGINAL RECEPTOR SEQUENCE!
+
+>T=0.1, sample=1, score=0.9798, global_score=0.9798, seq_recovery=0.1515
+PYLVINVPSGFGVVKIENGKVVEIDPEKVTNEVELPLDPETVVETINAIGEANGGEPISGKIVLKP/AEVEELLKKAEAIGWSEKEKFNAALKAAVKAAA
+^ USE THE DESIGNED BINDER SEQUENCE AFTER THE DASH!  
+
+ </pre>
+
 
 
 
