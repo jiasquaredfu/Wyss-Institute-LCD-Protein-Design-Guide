@@ -346,20 +346,27 @@ python ../protein_mpnn_run.py \
         --batch_size 1
 </pre>
 
-6. Run SLURM script. Debug by checking the error and output files. Error file should be empty and output should say "successfully ran inference" if it ran correctly. 
+4. Run SLURM script. Debug by checking the error and output files.
 <pre> sbatch run_pmpnn.slurm </pre> 
 You can check the status of the run by using
 <pre> squeue -u $USER </pre> 
 and cancelling the run if necessary by using 
 <pre> scancel <job_ID_number> </pre> 
 
+Error file should be empty and output should say something like this at the bottom if it ran correctly. 
+<pre> Number of edges: 48
+Training noise level: 0.2A
+Generating sequences for: hiv_0
+1 sequences of length 99 generated in 0.3514 seconds </pre> 
 
-7. Inspect output structure in PyMOL to ensure proper length, secondary structure, etc. The outputs will have a JSON with statistics and .cif.gz files. Those can be unzipped by double clicking and opened in PyMOL. Example linked [here](./rfdiff3_example/output)
+                                                   
+5. Inspect output sequence PyMOL to ensure proper length, secondary structure, etc. The output will be a .FA file within subfolders with a path like this:
+<pre>/n/data1/hms/wyss/collins/lab/users/jiajia/2_pmpnn/hiv_ex/output/hiv/seqs</pre
 
-<img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
+View the file with a file editor.Example linked [here](./pmpnn_example/output/hiv/seqs/hiv_0.fa)
 
 :bulb:
-Note: Press the SEQ button on the bottom right of PyMOL to see sequence information. Chain A is the specified binding region on the input receptor and chain B is the diffused binder. Notice that the binder output is all glycines, this is expected! This is where ProteinMPNN comes in, to assign it a meaningful amino acid sequence. :bulb:
+Note: ProteinMPNN redesigns the input receptor sequence as well as the binder! Do not be alarmed if your sequence for the fixed receptor also changes. If this happens, ensure for the next step you are using the ORIGINAL receptor/input sequence. :bulb:
 
 
 
