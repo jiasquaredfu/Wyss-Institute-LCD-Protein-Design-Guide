@@ -1,7 +1,7 @@
 # Wyss-Institute-LCD-Protein-Design-Guide
 Greetings! This README will walk you through how to access the HMS O2 Cluster, access our protein design tools, activate the necessary dependencies and finally how to design de novo mini binders! 
 
-#### :warning: Protein design work requires knowledge of basic syntax in terminal/VIM, SLURM, and Conda. If you are not familiar, this page contains very helpful commands to reference [here](./command_cheatsheet.md). :warning:
+#### :warning: Protein design work requires knowledge of basic syntax in terminal/VIM, SLURM, and Conda. If you have not heard of these before, this page contains crucial commands to reference [here](./command_cheatsheet.md)! :warning:
 
 # Accessing the Cluster :computer:
 
@@ -31,12 +31,11 @@ There are three setup steps needed before the pipeline can run.
 <b> You only need to run these setup steps once! </b>
 
 
-:warning: Start by requesting an interactive session on the O2 cluster. The following command allocates 8 CPUs and 32G of memory for a 2 hour session. Any computationally intensive activity like setup or debugging if you are not submitting SLURM jobs should be done in one of these! Otherwise the SLURM scheduler will kill the job and send you an email saying not to run intensive jobs in the login node :)
+:warning: Start setup by requesting an interactive session on the O2 cluster. :warning: Setup or debugging, or <b> anything you are not submitting via SLURM job </b> should be done in one of these! Otherwise the SLURM scheduler will kill the job and send you an email saying not to run intensive jobs in the login node :) 
 
 <pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
 
-:warning:
-
+The above command allocates 8 CPUs and 32G of memory for a 2 hour session.
 
 ## Conda :snake:
 Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. 
