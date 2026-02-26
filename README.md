@@ -155,9 +155,10 @@ Pymol is a protein structure visualization software. This allows you to visually
 
 
 # Running the Pipeline :runner:
+
 <img width="865" height="609" alt="image" src="https://github.com/user-attachments/assets/2a8b2178-7ffd-4f73-8587-e5721da5b795" />
 
-<b> Finally it's time for the fun stuff! </b>
+<b> FINALLY, it's time for the fun stuff! </b>
 
 The "standard" protein design pipeline is composed of 3 steps:
 ---
@@ -195,6 +196,12 @@ For additional context on each tool and target applications protein design can t
 
 :warning:
 Before you embark on a design campaign, ensure you know what your target is! These newer tools like RFDiffusion3 and RoseTTAFold3 are atomistic. This means instead of inputs at a residue level, you need to specify exactly what side chain atoms you want to diffuse or design protein-protein interactions with. You may need to provide an input template for RFDiffusion. For the example in this Github, to create a HIV minibinder, I supplied a constrained structure file of the HIV spike protein I want to bind to. I also supplied "hotspot residues" and estimated which atoms would be most relevant for binding. The input types will depend on your application, such as binders, homooligomers, enzymes, etc. I highly recommend looking at other examples in the RFDiffusion Github for different use cases. Literature review before designing is extremely important! :warning:
+
+:warning:
+If you need to run GPU-dependent tools quickly (for example, your RFdiffusion SLURM job is stuck in queue for hours or days!) run the following line:
+<pre> srun --pty -t 1:0:0 --mem 32G -p gpu --gres=gpu:1 bash </pre>
+and run the scripts directly (without a .slurm file). If this also queues for a long time, reducing the time (-t) and memory allocation (--mem) may get you allocated compute faster. 
+:warning:
 
 Now... with target established... without further ado!
 
@@ -248,9 +255,7 @@ Now... with target established... without further ado!
 rfd3 design n_batches=1 diffusion_batch_size=2  out_dir=./output ckpt_path=../../../../software/foundry/checkpoints/rfd3_latest.ckpt inputs=./input/hiv_binder.json ->change to .json name skip_existing=False dump_trajectories=True prevalidate_inputs=True inference_sampler.step_scale=3 inference_sampler.gamma_0=0.2
 </pre>
 
-If you need to run GPU-dependent tools quickly (for example, your RFdiffusion SLURM job is stuck in queue for hours or days!) run the following line:
-<pre> srun --pty -t 1:0:0 --mem 32G -p gpu --gres=gpu:1 bash </pre>
-and run the scripts directly (without a .slurm file). If this also queues for a long time, reducing the time (-t) and memory allocation (--mem) may get you allocated compute faster. -> note the lowest recommended range 
+
 
 
 
