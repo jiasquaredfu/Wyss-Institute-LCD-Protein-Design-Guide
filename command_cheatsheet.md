@@ -5,7 +5,10 @@ Before starting any computational work, having basic familiarity with Unix/Linux
 | Linux/VIM Command  | Function                                                |
 |--------------------------|---------------------------------------------------------|
 | `ssh Your_HMS_ID@o2.hms.harvard.edu`  | access HMS O2 cluster                      |
-| `scp -r Your_HMS_ID@transfer.rc.hms.harvard.edu:<path_on_cluster>/ <path_on your_computer>`  | copy folder from cluster to local                      |
+| `scp Your_HMS_ID@transfer.rc.hms.harvard.edu:<path_on_cluster> <path_on your_computer>`  | copy file from cluster to local (run this in local terminal window, not on cluster)                      |
+| `scp -r Your_HMS_ID@transfer.rc.hms.harvard.edu:<path_on_cluster> <path_on your_computer>`  | copy folder from cluster to local (run this in local terminal window, not on cluster)                      |
+| `scp <path_on your_computer> Your_HMS_ID@transfer.rc.hms.harvard.edu:<path_on_cluster> `  | copy file from local to cluster (run this in local terminal window, not on cluster)                      |
+| `scp -r <path_on your_computer> Your_HMS_ID@transfer.rc.hms.harvard.edu:<path_on_cluster> `  | copy folder from local to cluster (run this in local terminal window, not on cluster)                      |
 | `ls`                     | show contents of current directory                      |
 | `cd <folder_name>`       | move into folder                                        |
 | `cd ..`                  | move out of folder                                      |
