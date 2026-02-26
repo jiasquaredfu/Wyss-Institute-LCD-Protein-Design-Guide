@@ -240,8 +240,8 @@ Now... without further ado!
 
     }
 }</pre>
-::bulb
-Note: The ligand size ranges from 3 atoms to ~80 atoms. Any less and RFdiffusion will treat it as noise, and any more heavy atoms the system destabilizes. 60-70 atoms is considered optimal. Additionally, if you only have residue level information for the hotspots, you can replace the atom designations after the : in the select_hotspots flag with "null". You also cannot specify a glycine residue as a hotspot as RFdiff3 requires side chain atoms as input. ::bulb
+:bulb:
+Note: The ligand size ranges from 3 atoms to ~80 atoms. Any less and RFdiffusion will treat it as noise, and any more heavy atoms the system destabilizes. 60-70 atoms is considered optimal. Additionally, if you only have residue level information for the hotspots, you can replace the atom designations after the : in the select_hotspots flag with "null". You also cannot specify a glycine residue as a hotspot as RFdiff3 requires side chain atoms as input. :bulb:
 
 5. Edit the SLURM script with a file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
 <pre> vi run_rfdiff3.slurm </pre> 
@@ -274,8 +274,8 @@ and cancelling the run if necessary by using
 
 <img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
 
-::bulb
-Note: Chain A is the specified binding region on the input receptor and chain B is the diffused binder. Notice that the output is all glycines, this is expected! This is where ProteinMPNN comes in, to assign it a meaningful amino acid sequence. ::bulb
+:bulb:
+Note: Press the SEQ button on the bottom right of PyMOL to see sequence information. Chain A is the specified binding region on the input receptor and chain B is the diffused binder. Notice that the binder output is all glycines, this is expected! This is where ProteinMPNN comes in, to assign it a meaningful amino acid sequence. :bulb:
 
 
 
