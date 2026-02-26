@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/n/data1/hms/wyss/collins/lab/software/ProteinMPNN/hiv_ex/../protein_mpnn_run.py", line 469, in <module>
+    main(args)   
+    ^^^^^^^^^^
+  File "/n/data1/hms/wyss/collins/lab/software/ProteinMPNN/hiv_ex/../protein_mpnn_run.py", line 10, in main
+    import torch
+  File "/n/data1/hms/wyss/collins/lab/software/miniconda/envs/pmpnn/lib/python3.12/site-packages/torch/__init__.py", line 367, in <module>
+    from torch._C import *  # noqa: F403
+    ^^^^^^^^^^^^^^^^^^^^^^
+ImportError: /n/data1/hms/wyss/collins/lab/software/miniconda/envs/pmpnn/lib/python3.12/site-packages/torch/lib/libtorch_cpu.so: undefined symbol: iJIT_NotifyEvent
