@@ -4,6 +4,8 @@ Before starting any computational work, having basic familiarity with Unix/Linux
 
 | Linux/VIM Command  | Function                                                |
 |--------------------------|---------------------------------------------------------|
+| `ssh Your_HMS_ID@o2.hms.harvard.edu`  | access HMS O2 cluster                      |
+| `scp -r Your_HMS_ID@transfer.rc.hms.harvard.edu:<path_on_cluster>/ <path_on your_computer>`  | copy folder from cluster to local                      |
 | `ls`                     | show contents of current directory                      |
 | `cd <folder_name>`       | move into folder                                        |
 | `cd ..`                  | move out of folder                                      |
@@ -16,6 +18,7 @@ Before starting any computational work, having basic familiarity with Unix/Linux
 | `:wq`                    | save and quit file                                      |
 | `:q`                     | quit file without saving                                |
 
+  
 For more helpful resources, check out these links:
 - [Here](https://www.geeksforgeeks.org/linux-unix/linux-commands-cheat-sheet/) is a comprehensive Linux cheat sheet for reference <br>
 - [Here](https://gitlab.com/slackermedia/bashcrawl) is a game that helps you build up your Linux muscle memory! <br>
