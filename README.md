@@ -217,12 +217,12 @@ Now... without further ado!
 <pre> conda activate foundry  </pre>
  Your command line should say (foundry) instead of (base) to the left of your cursor
  
-2. Ensure you have a SLURM script, input and output folders for each project you are completing and enter the folder. Refer to examples [here](./rfdiff3_example)
+2. Ensure you have a SLURM script, input and output folders for each project you are completing and enter the folder. Refer to examples [here](./1_rfdiff3_example)
 
 <pre> cd rfdiff3_example </pre>
 
 3. Add your input PDB file into your working directory if you have one
-4. Edit the input .JSON with a file editor. Example linked [here](./rfdiff3_example/input/hiv_binder.json)
+4. Edit the input .JSON with a file editor. Example linked [here](./1_rfdiff3_example/input/hiv_binder.json)
 
 <pre> vi input/hiv_binder.json </pre>
 
@@ -243,7 +243,7 @@ Now... without further ado!
 :bulb:
 Note: The ligand size ranges from 3 atoms to ~80 atoms. Any less and RFdiffusion will treat it as noise, and any more heavy atoms the system destabilizes. 60-70 atoms is considered optimal. Additionally, if you only have residue level information for the hotspots, you can replace the atom designations after the : in the select_hotspots flag with "null". You also cannot specify a glycine residue as a hotspot as RFdiff3 requires side chain atoms as input. :bulb:
 
-5. Edit the SLURM script with a file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
+5. Edit the SLURM script with a file editor. Example linked [here](./1_rfdiff3_example/run_rfdiff3.slurm)
 <pre> vi run_rfdiff3.slurm </pre> 
 
 <pre>
@@ -277,7 +277,7 @@ The error file should say something like this and output should say nothing or j
  
 </pre>
 
-7. Inspect output structure in PyMOL to ensure proper length, secondary structure, etc. The outputs will have a JSON with statistics and .cif.gz files. Those can be unzipped by double clicking and opened in PyMOL. Example linked [here](./rfdiff3_example/output)
+7. Inspect output structure in PyMOL to ensure proper length, secondary structure, etc. The outputs will have a JSON with statistics and .cif.gz files. Those can be unzipped by transferring from the cluster to your local computer, double clicking and opened in PyMOL. Example linked [here](./1_rfdiff3_example/output)
 
 <img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
 
@@ -295,11 +295,12 @@ Note: This pipeline still uses the original ProteinMPNN implementation as the fo
 <pre> conda activate pmpnn </pre>
  Your command line should say (pmpnn) instead of (base) to the left of your cursor
  
-2. Ensure you have a SLURM script, input and output folders for each project you are completing and enter the folder. Refer to examples [here](./pmpnn_example)
+2. Ensure you have a SLURM script, input and output folders for each project you are completing and enter the folder. Refer to examples [here](./2_pmpnn_example)
 
 <pre> cd pmpnn_example </pre>
 
-3. Edit the SLURM script with a file editor. Example linked [here](./pmpnn_example/run_pmpnn.slurm)
+3. Copy RFdiffusion output to input folder for ProteinMPNN
+4. Edit the SLURM script with a file editor. Example linked [here](./2_pmpnn_example/run_pmpnn.slurm)
 
 <pre> vi run_pmpnn.slurm </pre> 
 
@@ -363,7 +364,7 @@ Generating sequences for: hiv_0
 5. Inspect output sequence to ensure proper length, secondary structure, etc. The output will be a .FA file within subfolders with a path like this:
 <pre>/n/data1/hms/wyss/collins/lab/users/jiajia/2_pmpnn/hiv_ex/output/hiv/seqs </pre>
 
-View the file with a file editor. Example linked [here](./pmpnn_example/output/hiv/seqs/hiv_0.fa).
+View the file with a file editor. Example linked [here](./2_pmpnn_example/output/hiv/seqs/hiv_0.fa).
 
 :bulb:
 Note: ProteinMPNN redesigns the input receptor sequence as well as the binder! Do not be alarmed if your sequence for the fixed receptor also changes. If this happens, ensure for the next step you are using the ORIGINAL receptor/input sequence. :bulb:
@@ -378,6 +379,111 @@ PYLVINVPSGFGVVKIENGKVVEIDPEKVTNEVELPLDPETVVETINAIGEANGGEPISGKIVLKP/AEVEELLKKAEAI
 ^ USE THE DESIGNED BINDER SEQUENCE AFTER THE DASH!  
 
  </pre>
+
+
+ ## [RoseTTAFold3](https://github.com/RosettaCommons/foundry/blob/production/models/rf3/README.md) :crystal_ball:
+
+1. Load foundry conda environment
+
+<pre> conda activate foundry  </pre>
+ Your command line should say (foundry) instead of (base) to the left of your cursor
+ 
+2. Ensure you have a SLURM script, input and output folders for each project you are completing and enter the folder. Refer to examples [here](./3_rf3_example)
+
+<pre> cd 3_rf3_example </pre>
+
+3. Create input .JSON using ProteinMPNN output. Example linked [here](./3_rf3_example/input/pmpnn_hiv_seq.json)
+
+<pre> vi input/pmpnn_hiv_seq.json </pre>
+
+<pre>         {
+                "name": "hiv_receptor", # -> change
+                "components": [
+                        {
+                                "seq": "EFFYCNTSGLFNSTWISNTSVQGSNSTGSNDSITLPCRIKQIINMWQRIGQAMYAPPIQGVIRCVS", -> original receptor sequence, change
+                                "chain_id": "A" 
+                        },
+                        {
+                                "seq": "AEVEELLKKAEAIGWSEKEKFNAALKAAVKAAA", -> designed binder sequence, change
+                                "chain_id": "B"
+                        }
+                ]
+        }
+
+]</pre>
+
+5. Edit the SLURM script with a file editor. Example linked [here](./3_rf3_example/run_rf3.slurm)
+<pre> vi run_rf3.slurm </pre> 
+
+<pre>
+#!/bin/bash
+# submit_rfdiffusion_job.slurm
+
+#SBATCH --job-name=rf3_ex # Job name in SLURM
+#SBATCH --output=%j_output_rf3.txt   # Output file
+#SBATCH --error=%j_error_rf3.txt     # Error file
+#SBATCH --gres=gpu:1    # Number of GPUs
+#SBATCH --mem=32G       # Memory allocation, recommended 12-40G for RFDiffusion
+#SBATCH --cpus-per-task=8       #Number of GPUs
+#SBATCH --partition=gpu # Must use this or gpu_quad (only if pre-clinically affiliated PI, see O2 documentation) partition
+#SBATCH --time=2:00:00 # Runtime for job
+
+# Initializing environments
+module purge
+conda init bash
+source ~/.bashrc
+conda activate foundry
+
+
+# Optional troubleshooting lines to check GPU availability
+
+echo "CUDA_VISIBLE_DEVICES=$CUDA_VISIBLE_DEVICES"
+python - << 'EOF'
+import torch
+print("CUDA available:", torch.cuda.is_available())
+if torch.cuda.is_available():
+    print("Device:", torch.cuda.get_device_name(0))
+    print("CUDA version:", torch.version.cuda)
+EOF
+
+
+# RoseTTAFold run inference commands
+rf3 fold inputs='/n/data1/hms/wyss/collins/lab/users/jiajia/3_rf3/hiv_ex/input/pmpnn_hiv_seq.json' ckpt_path='/n/data1/hms/wyss/collins/lab/software/1_backbone_design/foundry/checkpoints/rf3_foundry_01_24_latest.ckpt' out_dir='/n/data1/hms/wyss/collins/lab/users/jiajia/3_rf3/hiv_ex/output' ->change input, output
+~                                                                                                    
+</pre>
+
+6. Run SLURM script. Debug by checking the error and output files. 
+<pre> sbatch run_rfdiff3.slurm </pre> 
+You can check the status of the run by using
+<pre> squeue -u $USER </pre> 
+and cancelling the run if necessary by using 
+<pre> scancel <job_ID_number> </pre> 
+
+The error file should say something like this and output should say nothing or just show the GPU stats if it ran correctly. 
+<pre>
+ 16:45:06 INFO rf3.inference_engines.rf3: [rank: 0] Found 1 structures to predict!
+16:45:06 INFO rf3.inference_engines.rf3: [rank: 0] Predicting structure 1/1: hiv_receptor
+
+</pre>
+
+7. Inspect output structure in PyMOL to ensure proper length, secondary structure, etc. The output will be a .CIF file within subfolders with a path like this:
+<pre>/Users/jiasquared/Desktop/Wyss/Wyss-Institute-LCD-Protein-Design-Guide/3_rf3_example/output/hiv_receptor/seed-0_sample-0/hiv_receptor_seed-0_sample-0_model.cif </pre>
+
+Those can be unzipped by transferring from the cluster to your local computer, double clicking and opened in PyMOL. Example linked [here](./3_rf3_example/output)
+
+<img width="1180" height="601" alt="image" src="https://github.com/user-attachments/assets/02ef6217-b873-43f9-8cf7-9d9cf81529af" />
+
+---
+### Congrats!
+
+Now you have your very own <i> de novo </i> designed protein.
+
+---
+### Filtering 
+
+
+
+
 
 
 
