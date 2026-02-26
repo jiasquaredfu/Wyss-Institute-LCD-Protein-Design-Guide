@@ -360,13 +360,25 @@ Generating sequences for: hiv_0
 1 sequences of length 99 generated in 0.3514 seconds </pre> 
 
                                                    
-5. Inspect output sequence PyMOL to ensure proper length, secondary structure, etc. The output will be a .FA file within subfolders with a path like this:
-<pre>/n/data1/hms/wyss/collins/lab/users/jiajia/2_pmpnn/hiv_ex/output/hiv/seqs</pre
+5. Inspect output sequence to ensure proper length, secondary structure, etc. The output will be a .FA file within subfolders with a path like this:
+<pre>/n/data1/hms/wyss/collins/lab/users/jiajia/2_pmpnn/hiv_ex/output/hiv/seqs </pre>
 
-View the file with a file editor.Example linked [here](./pmpnn_example/output/hiv/seqs/hiv_0.fa)
+View the file with a file editor. Example linked [here](./pmpnn_example/output/hiv/seqs/hiv_0.fa).
 
 :bulb:
 Note: ProteinMPNN redesigns the input receptor sequence as well as the binder! Do not be alarmed if your sequence for the fixed receptor also changes. If this happens, ensure for the next step you are using the ORIGINAL receptor/input sequence. :bulb:
+
+<pre>
+>hiv_0, score=2.8675, global_score=2.8675, fixed_chains=[], designed_chains=['A', 'B'], model_name=v_48_020, git_hash=8907e6671bfbfc92303b5f79c4b5e6ce47cdef57, seed=37
+EFFYCNTSGLFNSTWISNTSVQGSNSTGSNDSITLPCRIKQIINMWQRIGQAMYAPPIQGVIRCVS/GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+^ USE THIS ORIGINAL RECEPTOR SEQUENCE!
+
+>T=0.1, sample=1, score=0.9798, global_score=0.9798, seq_recovery=0.1515
+PYLVINVPSGFGVVKIENGKVVEIDPEKVTNEVELPLDPETVVETINAIGEANGGEPISGKIVLKP/AEVEELLKKAEAIGWSEKEKFNAALKAAVKAAA
+^ USE THE DESIGNED BINDER SEQUENCE AFTER THE DASH!  
+
+ </pre>
+
 
 
 
