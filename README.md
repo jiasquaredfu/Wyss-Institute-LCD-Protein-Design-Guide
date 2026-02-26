@@ -481,7 +481,10 @@ Now you have your very own <i> de novo </i> designed protein :D
 ---
 ### Filtering 
 
-Now that you are a master protein designer, we need to scale up. If we are designing proteins high-throughput on the scale of thousands, how can we assess which designs are best for your application?
+Now that you are a master protein designer, we need to scale up. However, if you recall on the protein design workflow diagram, there is one step left: validation! When doing high-throughput protein design on the scale of thousands, how can we assess which designs are best? We can extract and filter based on the following metrics from our structure prediction:
+
+1. RMSD
+2. PlDDT (rosettafold different?)
 
 
 
