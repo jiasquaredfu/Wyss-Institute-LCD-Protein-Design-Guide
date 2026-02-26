@@ -160,7 +160,7 @@ Pymol is a protein structure visualization software. This allows you to visually
 <b> Finally it's time for the fun stuff! </b>
 
 The "standard" protein design pipeline is composed of 3 steps:
-
+---
 ### 1. Backbone design (User Parameters → Structure)
 
 - Generates the 3D scaffold for your target design, such as a binder, enzyme, or *de novo* protein  
@@ -209,41 +209,44 @@ Now... with target established... without further ado!
 
 <pre> cd rfdiff3_example </pre>
 
-3. Add your input . 
-4. Open the input .JSON with a file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
-<pre> vi run_rfdiff3.slurm </pre>
-4.
-5.
-6. Open the SLURM script in file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
-<pre> vi run_rfdiff3.slurm </pre>
+3. Add your input PDB file into your working directory if you have one
+4. Edit the input .JSON with a file editor. Example linked [here](./rfdiff3_example/input/hiv_binder.json)
 
-4. Adjust batch script parameters 
+<pre> vi input/hiv_binder.json </pre>
+
+<pre> {
+    "hivr": {
+        "dialect": 2,
+        "infer_ori_strategy": "hotspots", 
+        "input": "./bg505.pdb", # input -> change
+        "contig": "20-50,/0,A350-415", # 20-50 is length of binder, /0 is chain break to prevent fusing of binder to receptor structure, A350-415 is the motif scaffold of receptor residues 350-415 of chain A   
+        "select_hotspots": { # residues and atoms for binder to contact -> change
+            "A368": "OG1",
+            "A370": "CG1,CG2"
+       },
+       "is_non_loopy": true
+
+    }
+}</pre>
+
+5. Edit the SLURM script with a file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
+<pre> vi run_rfdiff3.slurm </pre> 
 
 <pre>
 #!/bin/bash
-# submit_rfdiffusion_job.slurm 	
-
+ 
 #SBATCH --job-name=hiv_ex # Job name in SLURM	-> change 
-#SBATCH --output=%j_output_rfdiff3.txt   # Output file -> change file name, optional
-#SBATCH --error=%j_error_rfdiff3.txt     # Error file -> change file name, optional
+#SBATCH --output=%j_output_rfdiff3.txt   # Output file 
+#SBATCH --error=%j_error_rfdiff3.txt     # Error file 
 #SBATCH --gres=gpu:1	# Number of GPUs -> do not change 
 #SBATCH --mem=32G	# Memory allocation -> do not change, recommended 12-40G for RFDiffusion
 #SBATCH --cpus-per-task=8	#Number of GPUs -> do not change 
 #SBATCH --partition=gpu # Must use this or gpu_quad (only if pre-clinically affiliated PI, see O2 documentation) partition -> do not change 
-#SBATCH --time=2:00:00 # Runtime for job -> change optional
+#SBATCH --time=2:00:00 # Runtime for job -> change 
+
+# RFDiffusion run inference commands
+rfd3 design n_batches=1 diffusion_batch_size=2  out_dir=./output ckpt_path=../../../../software/foundry/checkpoints/rfd3_latest.ckpt inputs=./input/hiv_binder.json ->change to .json name skip_existing=False dump_trajectories=True prevalidate_inputs=True inference_sampler.step_scale=3 inference_sampler.gamma_0=0.2
 </pre>
-
-5. # RFDiffusion run inference commands
-rfd3 design n_batches=1 diffusion_batch_size=2  out_dir=./output ckpt_path=../../../../software/foundry/checkpoints/rfd3_latest.ckpt inputs=./input/hiv_binder.json skip_existing=False dump_trajectories=True prevalidate_inputs=True inference_sampler.step_scale=3 inference_sampler.gamma_0=0.2
-6.
-7. 
-3. 
- 
-
-4. 
-
-
-
 
 If you need to run GPU-dependent tools quickly (for example, your RFdiffusion SLURM job is stuck in queue for hours or days!) run the following line:
 <pre> srun --pty -t 1:0:0 --mem 32G -p gpu --gres=gpu:1 bash </pre>
