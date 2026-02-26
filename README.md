@@ -262,6 +262,83 @@ Note: The ligand size ranges from 3 atoms to ~80 atoms. Any less and RFdiffusion
 rfd3 design n_batches=1 diffusion_batch_size=2  out_dir=./output ckpt_path=../../../../software/foundry/checkpoints/rfd3_latest.ckpt inputs=./input/hiv_binder.json skip_existing=False dump_trajectories=True prevalidate_inputs=True inference_sampler.step_scale=3 inference_sampler.gamma_0=0.2
 </pre>
 
+6. Run SLURM script. Debug by checking the error and output files. 
+<pre> sbatch run_rfdiff3.slurm </pre> 
+You can check the status of the run by using
+<pre> squeue -u $USER </pre> 
+and cancelling the run if necessary by using 
+<pre> scancel <job_ID_number> </pre> 
+
+The error file should say something like this and output should say nothing or just show the GPU stats if it ran correctly. 
+<pre>
+ 17:31:12 INFO rfd3.engine: [rank: 0] Finished inference batch in 13.06 seconds.
+17:31:17 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_hivr_0_model_0 written to /n/data1/hms/wyss/collins/lab/software/rf3_hiv_ex/output/hiv_binder_hivr_0_model_0.
+17:31:23 INFO rfd3.engine: [rank: 0] Outputs for hiv_binder_hivr_0_model_1 written to /n/data1/hms/wyss/collins/lab/software/rf3_hiv_ex/output/hiv_binder_hivr_0_model_1.
+ 
+</pre>
+
+7. Inspect output structure in PyMOL to ensure proper length, secondary structure, etc. The outputs will have a JSON with statistics and .cif.gz files. Those can be unzipped by double clicking and opened in PyMOL. Example linked [here](./rfdiff3_example/output)
+
+<img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
+
+:bulb:
+Note: Press the SEQ button on the bottom right of PyMOL to see sequence information. Chain A is the specified binding region on the input receptor and chain B is the diffused binder. Notice that the binder output is all glycines, this is expected! This is where ProteinMPNN comes in, to assign it a meaningful amino acid sequence. :bulb:
+
+
+## [ProteinMPNN](https://github.com/dauparas/ProteinMPNN) :dango:
+
+:bulb:
+Note: This pipeline still uses the original ProteinMPNN implementation as the foundry version is still working through bugs! :bulb:
+
+1. Load proteinmpnn conda environment
+
+<pre> conda activate pmpnn </pre>
+ Your command line should say (pmpnn) instead of (base) to the left of your cursor
+ 
+2. Ensure you have a SLURM script, input and output folders for each project you are completing and enter the folder. Refer to examples [here](./pmpnn_example)
+
+<pre> cd pmpnn_example </pre>
+
+3. Edit the SLURM script with a file editor. Example linked [here](./pmpnn_example/run_pmpnn.slurm)
+
+<pre> vi input/hiv_binder.json </pre>
+
+<pre> {
+    "hivr": {
+        "dialect": 2,
+        "infer_ori_strategy": "hotspots", 
+        "input": "./bg505.pdb", # input -> change
+        "contig": "20-50,/0,A350-415", # 20-50 is length of binder, /0 is chain break to prevent fusing of binder to receptor structure, A350-415 is the motif scaffold of receptor residues 350-415 of chain A   
+        "select_hotspots": { # residues and atoms for binder to contact -> change
+            "A368": "OG1",
+            "A370": "CG1,CG2"
+       },
+       "is_non_loopy": true
+
+    }
+}</pre>
+:bulb:
+Note: The ligand size ranges from 3 atoms to ~80 atoms. Any less and RFdiffusion will treat it as noise, and any more heavy atoms the system destabilizes. 60-70 atoms is considered optimal. Additionally, if you only have residue level information for the hotspots, you can replace the atom designations after the : in the select_hotspots flag with "null". You also cannot specify a glycine residue as a hotspot as RFdiff3 requires side chain atoms as input. :bulb:
+
+5. Edit the SLURM script with a file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
+<pre> vi run_rfdiff3.slurm </pre> 
+
+<pre>
+#!/bin/bash
+ 
+#SBATCH --job-name=hiv_ex # Job name in SLURM	-> change 
+#SBATCH --output=%j_output_rfdiff3.txt   # Output file 
+#SBATCH --error=%j_error_rfdiff3.txt     # Error file 
+#SBATCH --gres=gpu:1	# Number of GPUs -> do not change 
+#SBATCH --mem=32G	# Memory allocation -> do not change, recommended 12-40G for RFDiffusion
+#SBATCH --cpus-per-task=8	#Number of GPUs -> do not change 
+#SBATCH --partition=gpu # Must use this or gpu_quad (only if pre-clinically affiliated PI, see O2 documentation) partition -> do not change 
+#SBATCH --time=2:00:00 # Runtime for job -> change 
+
+# RFDiffusion run inference commands -> change n_batches (number of outputs per run), diffusion_batch_size (number of trajectories per diffusion step, only affects GPU usage), inputs (.json input name), 
+rfd3 design n_batches=1 diffusion_batch_size=2  out_dir=./output ckpt_path=../../../../software/foundry/checkpoints/rfd3_latest.ckpt inputs=./input/hiv_binder.json skip_existing=False dump_trajectories=True prevalidate_inputs=True inference_sampler.step_scale=3 inference_sampler.gamma_0=0.2
+</pre>
+
 6. Run SLURM script. Debug by checking the error and output files. Error file should be empty and output should say "successfully ran inference" if it ran correctly. 
 <pre> sbatch run_rfdiff3.slurm </pre> 
 You can check the status of the run by using
