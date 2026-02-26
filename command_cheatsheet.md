@@ -1,5 +1,7 @@
-# Navigating Terminal with Linux
+# HMS IT O2 CLuster
+Detailed cluster-specific documentation such as how to access GPUs, troubleshooting SLURM runs, and all other infrastrcture questions for  can be found [here](https://harvardmed.atlassian.net/wiki/spaces/O2/overview?homepageId=1586790623)!
 
+# Navigating Terminal with Linux
 Before starting any computational work, having basic familiarity with Unix/Linux will allow you to navigate and interact with all the software you will use! Going into your Terminal and testing out these commands is a good way to get some hands-on practice. 
 
 | Linux/VIM Command  | Function                                                |
@@ -27,8 +29,7 @@ For more helpful resources, check out these links:
 - [Here](https://gitlab.com/slackermedia/bashcrawl) is a game that helps you build up your Linux muscle memory! <br>
 
 
-
-# Accessing Packages with Conda 
+# Running Environments with Conda 
 
 Conda runs "environments" are essentially directories with isolated software packages. Each user must configure the shared conda to be able to run it from their node on the cluster, and eventually setup different conda environments to run different protein design softwares. 
 
