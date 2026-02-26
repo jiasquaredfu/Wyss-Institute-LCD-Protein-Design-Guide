@@ -15,9 +15,6 @@ You can then navigate to our software folder located at this directory:
 
 <pre> cd /n/data1/hms/wyss/collins/lab/software </pre>
 
-Start by requesting an interactive session on the O2 cluster. The following command allocates 8 CPUs and 32G of memory for a 2 hour session. Any computationally intensive activity like setup or debugging should be done in one of these!
-
-<pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
 
 # Setup Before Running Pipeline :satellite:
 
@@ -32,6 +29,14 @@ There are three setup steps needed before the pipeline can run.
 3. Downloading Pymol on your Computer 
 
 <b> You only need to run these setup steps once! </b>
+
+
+:warning: Start by requesting an interactive session on the O2 cluster. The following command allocates 8 CPUs and 32G of memory for a 2 hour session. Any computationally intensive activity like setup or debugging if you are not submitting SLURM jobs should be done in one of these! Otherwise the SLURM scheduler will kill the job and send you an email saying not to run intensive jobs in the login node :)
+
+<pre> srun --pty -p interactive -t 2:00:00 -c 8 --mem=32G bash </pre>
+
+:warning:
+
 
 ## Conda :snake:
 Conda is a python-based package management system. It runs "environments" which are essentially directories with isolated software packages. We need to setup your cluster account to be able to access the shared conda and create different conda environments to run different protein design software. 
