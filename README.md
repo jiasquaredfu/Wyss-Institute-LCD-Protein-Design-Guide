@@ -150,8 +150,7 @@ or
 Pymol is a protein structure visualization software. This allows you to visually inspect the structure you design throughout the pipeline steps and conduct preliminary analyses and filtering. Pymol is downloaded off the cluster, on your laptop. <b> You only need to run these setup steps once </b>!
 
 1. Download the educational Pymol [here](https://pymol.org/edu/) using your Wyss or HMS email
-2. You should see a UI like this, and be able to load .pdb or .cif files and play around with the structures. 
-<img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
+2. You should see a UI like this, and be able to load .pdb or .cif files and play around with the structures.<img width="1120" height="974" alt="image" src="https://github.com/user-attachments/assets/41446ea8-6a72-4c97-8a87-31c232642c56" />
 3. Learn basic Pymol commands in the cheat sheet [here](./command_cheatsheet.md)!
 
 
@@ -183,20 +182,56 @@ The "standard" protein design pipeline is composed of 3 steps:
 | ProteinMPNN | `.pdb` file of backbone from RFdiffusion | `.fa` sequence file (chains separated by `/`) |
 | RoseTTAFold3 | `.json` file containing sequence(s) from the ProteinMPNN `.fa` file | `.cif` structure file(s) |
 
-For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). Each software's official Github documentation are linked in the header if you want download the models locally and adjust them yourself. 
+For additional context on each tool and target applications protein design can tackle, we have overview slides [here](https://hu-my.sharepoint.com/:p:/g/personal/dawningjiaxi_fu_wyss_harvard_edu/EVwylZ5jwstJlKK3unATEh4BOkJ3t_kOPiGjVQT0rVE__A?e=bCCi2G). Each software's official Github documentation are linked in the headers below if you want download the models locally and adjust them yourself. 
+
+::🤔
+Before you embark on a design campaign, ensure you know what your target is! These newer tools like RFDiffusion3 and RoseTTAFold3 are atomistic. This means instead of inputs at a residue level, you need to specify exactly what side chain atoms you want to diffuse or design protein-protein interactions with. You may need to provide an input template for RFDiffusion. For the example in this Github, to create a HIV minibinder, I supplied a constrained structure file of the HIV spike protein I want to bind to. I also supplied "hotspot residues" and estimated which atoms would be most relevant for binding. The input types will depend on your application, such as binders, homooligomers, enzymes, etc. I highly recommend looking at other examples in the RFDiffusion Github for different use cases. Literature review before designing is extremely important! ::🤔
+
+Now... with target established... without further ado:
 
 ## [RFDiffusion3](https://github.com/RosettaCommons/foundry/blob/production/models/rfd3/README.md) :art:
+
 1. Load foundry conda environment
- <pre> conda activate foundry  </pre>
- Your command line should say (foundry) instead of (base) in your command line 
-2. Ensure you have a SLURM script, input and output folders for each project you are completing
-3. If you copied my directory, open the SLURM script. My examples are also in this Github [here]()
-<pre> yo  </pre> 
 
+<pre> conda activate foundry  </pre>
+ Your command line should say (foundry) instead of (base) to the left of your cursor
+ 
+2. Ensure you have a SLURM script, input and output folders for each project you are completing and enter the folder. Refer to examples [here](./rfdiff3_example)
 
+<pre> cd rfdiff3_example </pre>
 
-Each time you run RFDiffusion, first activate the environment by running:  <pre> conda activate foundry  </pre>
-You can deactivate it with: <pre> conda deactivate </pre>
+3. Add your input . 
+4. Open the input .JSON with a file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
+<pre> vi run_rfdiff3.slurm </pre>
+4.
+5.
+6. Open the SLURM script in file editor. Example linked [here](./rfdiff3_example/run_rfdiff3.slurm)
+<pre> vi run_rfdiff3.slurm </pre>
+
+4. Adjust batch script parameters 
+
+<pre>
+#!/bin/bash
+# submit_rfdiffusion_job.slurm 	
+
+#SBATCH --job-name=hiv_ex # Job name in SLURM	-> change 
+#SBATCH --output=%j_output_rfdiff3.txt   # Output file -> change file name, optional
+#SBATCH --error=%j_error_rfdiff3.txt     # Error file -> change file name, optional
+#SBATCH --gres=gpu:1	# Number of GPUs -> do not change 
+#SBATCH --mem=32G	# Memory allocation -> do not change, recommended 12-40G for RFDiffusion
+#SBATCH --cpus-per-task=8	#Number of GPUs -> do not change 
+#SBATCH --partition=gpu # Must use this or gpu_quad (only if pre-clinically affiliated PI, see O2 documentation) partition -> do not change 
+#SBATCH --time=2:00:00 # Runtime for job -> change optional
+</pre>
+
+5. # RFDiffusion run inference commands
+rfd3 design n_batches=1 diffusion_batch_size=2  out_dir=./output ckpt_path=../../../../software/foundry/checkpoints/rfd3_latest.ckpt inputs=./input/hiv_binder.json skip_existing=False dump_trajectories=True prevalidate_inputs=True inference_sampler.step_scale=3 inference_sampler.gamma_0=0.2
+6.
+7. 
+3. 
+ 
+
+4. 
 
 
 
